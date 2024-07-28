@@ -35,11 +35,11 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Community',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Chat',
       style: optionStyle,
     ),
     Text(
