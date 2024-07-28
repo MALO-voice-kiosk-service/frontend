@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 1: Community',
+      'Index 1: Community!!',
       style: optionStyle,
     ),
     Text(
