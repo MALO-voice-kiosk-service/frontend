@@ -7,7 +7,6 @@ class TrailMainPage extends StatefulWidget {
 
 class TrailMainPageState extends State<TrailMainPage> {
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
