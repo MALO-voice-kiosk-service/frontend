@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sparcs_2024_frontend/screens/community/comm_view.dart';
 import 'package:sparcs_2024_frontend/screens/loading.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_main.dart';
 
@@ -26,7 +27,7 @@ class MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _pages = [TrailMainPage(), TrailMainPage(), TrailMainPage(), TrailMainPage(), TrailMainPage()];
+  final List<Widget> _pages = [TrailMainPage(), TrailMainPage(), CommViewPage(), TrailMainPage(), TrailMainPage()];
 
   void _onItemTapped(int index) {
     setState(() {
