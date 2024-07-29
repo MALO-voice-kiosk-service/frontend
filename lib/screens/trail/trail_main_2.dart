@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:sparcs_2024_frontend/screens/trail/trail_main_2.dart';
 
-class TrailMainPage extends StatefulWidget {
+class TrailMainPage2 extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => TrailMainPageState();
+  State<StatefulWidget> createState() => TrailMainPage2State();
 }
 
-class TrailMainPageState extends State<TrailMainPage> {
+class TrailMainPage2State extends State<TrailMainPage2> {
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class TrailMainPageState extends State<TrailMainPage> {
                 child: const Text(
                   '이유민님, 반가워요 !',
                   style: TextStyle(
-                    fontSize: 17
+                      fontSize: 17
                   ),
 
                 ),
@@ -79,35 +78,15 @@ class TrailMainPageState extends State<TrailMainPage> {
               ),
               Container(
                 child: const Text(
-                  '산책할 지역을 선택해주세요',
+                  '산책 루트 추천을 위한 키워드를 선택해주세요',
                   style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold
                   ),
                 ),
               ),
               Container(
-                child: Row(
-                  children: [
-                    IconButton(
-                        icon: const Icon(Icons.map_outlined),
-                        color: const Color(0xff481C75),
-                        onPressed: () {
-                          null;
-                        }
-                    ),
-                    Text(
-                      '지도에서 선택',
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    )
-                  ],
-
-
-
-
-                ),
+                height: 10,
               ),
               Container(
                 width: MediaQuery.of(context).size.width - 40,
@@ -140,7 +119,7 @@ class TrailMainPageState extends State<TrailMainPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(() => TrailMainPage2());
+                      null;
                     },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white, backgroundColor: const Color(0xff481C75),
@@ -149,7 +128,7 @@ class TrailMainPageState extends State<TrailMainPage> {
                           borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
                         )
                     ),
-                    child: const Text('다음 단계로',
+                    child: const Text('산책 루트 추천받기',
                       style: TextStyle(
                         fontSize: 20,
                       ),),
@@ -163,7 +142,7 @@ class TrailMainPageState extends State<TrailMainPage> {
                 height: MediaQuery.of(context).size.height - 700,
                 color: Colors.grey,
                 child: Text(
-                  '광고'
+                    '광고'
                 ),
               )
             ],
