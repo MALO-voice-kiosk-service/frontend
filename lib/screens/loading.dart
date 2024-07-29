@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_main.dart';
 
 class LoadingPage extends StatefulWidget{
   @override
@@ -7,6 +10,11 @@ class LoadingPage extends StatefulWidget{
 }
 
 class _LoadingPageState extends State<LoadingPage>{
+  void initState(){
+    Timer(const Duration(seconds: 3), (){
+      Get.to(() => TrailMainPage());
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

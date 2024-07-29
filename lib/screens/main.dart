@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/loading.dart';
 
 void main(){
@@ -8,7 +9,7 @@ void main(){
 class NeuruApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: LoadingPage(),
     );
   }
