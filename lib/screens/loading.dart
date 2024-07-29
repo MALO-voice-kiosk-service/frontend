@@ -13,8 +13,6 @@ class _LoadingPageState extends State<LoadingPage>{
       resizeToAvoidBottomInset : false,
       body: SingleChildScrollView(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           color: const Color(0xff8B75B5),
           child: Column(
             children: [
@@ -39,10 +37,14 @@ class _LoadingPageState extends State<LoadingPage>{
                   'lib/assets/loading_logo.png',
                 ),
               ),
-              Image.asset(
-                'lib/assets/loading - 1.png',
-                fit: BoxFit.fill,
-              )
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  'lib/assets/loading_road.png',
+                  fit: BoxFit.fill,
+                ),
+              ),
             ],
           )
         ),
