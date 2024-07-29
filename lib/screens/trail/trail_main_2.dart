@@ -117,12 +117,12 @@ class TrailMainPage2State extends State<TrailMainPage2> {
               Container(
                   margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
                   width: double.infinity,
-                  child: ElevatedButton(
+                  child: TextButton(
                     onPressed: () {
                       null;
                     },
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white, backgroundColor: const Color(0xff481C75),
+                        foregroundColor: const Color(0xff481C75),
                         padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
