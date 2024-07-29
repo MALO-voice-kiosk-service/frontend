@@ -4,6 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:sparcs_2024_frontend/screens/login_signup/signup.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_main.dart';
 
+import '../main.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LoginPageState();
@@ -111,7 +113,7 @@ class LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(() => TrailMainPage());
+                    Get.to(() => MainPage());
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white, backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
