@@ -41,7 +41,7 @@ class LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
                 child: TextFormField(
-                  key: const ValueKey(1),
+                  key: const ValueKey(3),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person,
@@ -76,7 +76,7 @@ class LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
                 child: TextFormField(
-                  key: const ValueKey(1),
+                  key: const ValueKey(4),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.lock,
