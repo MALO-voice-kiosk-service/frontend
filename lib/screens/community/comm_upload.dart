@@ -10,6 +10,9 @@ class CommUploadPage extends StatefulWidget {
 }
 
 class CommUploadPageState extends State<CommUploadPage> {
+
+  bool isJoinSelected = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +77,18 @@ class CommUploadPageState extends State<CommUploadPage> {
                           Row(
                             children: [
                               ElevatedButton(
-                                  onPressed: null,
+                                  onPressed: (){
+                                    setState(() {
+                                      isJoinSelected = true;
+                                    });
+                                  },
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(const Color(0xff481C75)),
+                                  backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                    if(isJoinSelected){
+                                      return const Color(0xff481C75);
+                                    }
+                                    return Colors.grey;
+                                  }),
                                 ),
                                   child: const Text(
                                       '친목',
@@ -84,11 +96,23 @@ class CommUploadPageState extends State<CommUploadPage> {
                                   ),
                               ),
                               const SizedBox(width: 5,),
-                              const ElevatedButton(
-                                onPressed: null,
+                              ElevatedButton(
+                                onPressed: (){
+                                  setState(() {
+                                    isJoinSelected = false;
+                                  });
+                                },
                                 child: Text(
                                   '홍보',
                                   style: TextStyle(color: Colors.white),
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                                    if(!isJoinSelected){
+                                      return const Color(0xff481C75);
+                                    }
+                                    return Colors.grey;
+                                  }),
                                 ),
                               ),
                             ],
