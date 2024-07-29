@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/main.dart';
+import 'login_signup/login.dart';
+
 
 class LoadingPage extends StatefulWidget{
   @override
@@ -12,7 +14,7 @@ class LoadingPage extends StatefulWidget{
 class _LoadingPageState extends State<LoadingPage>{
   void initState(){
     Timer(const Duration(seconds: 1), (){
-      Get.to(() => MainPage());
+      Get.to(() => LoginPage());
     });
   }
   @override
