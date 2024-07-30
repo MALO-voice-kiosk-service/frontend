@@ -11,6 +11,8 @@ class TrailMainPage2 extends StatefulWidget {
 
 class TrailMainPage2State extends State<TrailMainPage2> {
 
+  static const keywords = ['반려견과', '동반자와', '혼자'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +74,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  'yumin 님ㅛ 반가워요 !',
+                  'yumin 님 반가워요 !',
                   style: TextStyle(
                       fontSize: 17
                   ),
@@ -108,12 +110,91 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                 child: SingleChildScrollView(
                   child: Container(
                     padding: const EdgeInsets.all(20),
-                    child: Column(
-
-
-
-
-
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround, // 간격을 동일하게 배치
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'lib/assets/dog.png',
+                                        width: 150, // 이미지의 너비 설정
+                                        height: 100, // 이미지의 높이 설정
+                                        fit: BoxFit.contain, // 이미지가 Container를 채우도록
+                                      ),
+                                      iconSize: 50, // 아이콘 크기 조절
+                                    ),
+                                    Text(
+                                      keywords[0],
+                                      style: TextStyle(fontSize: 18), // 텍스트 크기 조절
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'lib/assets/together.png',
+                                        width: 150, // 이미지의 너비 설정
+                                        height: 100, // 이미지의 높이 설정
+                                        fit: BoxFit.contain, // 이미지가 Container를 채우도록
+                                      ),
+                                      iconSize: 50, // 아이콘 크기 조절
+                                    ),
+                                    Text(
+                                      keywords[1],
+                                      style: TextStyle(fontSize: 18), // 텍스트 크기 조절
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                        'lib/assets/wheelchair.png',
+                                        width: 150, // 이미지의 너비 설정
+                                        height: 100, // 이미지의 높이 설정
+                                        fit: BoxFit.contain, // 이미지가 Container를 채우도록
+                                      ),
+                                      iconSize: 50, // 아이콘 크기 조절
+                                    ),
+                                    Text(
+                                      keywords[2],
+                                      style: TextStyle(fontSize: 18), // 텍스트 크기 조절
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
