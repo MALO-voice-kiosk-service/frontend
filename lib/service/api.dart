@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String baseUrl = 'http://223.130.157.192:8080';
-
 Future<Map<String, dynamic>> httpGet({required String path}) async {
-  baseUrl = baseUrl+path;
+  String baseUrl = 'http://223.130.157.192:8080$path';
+  print(baseUrl);
+
   try {
     http.Response response = await http.get(Uri.parse(baseUrl), headers: {
       "accept": "application/json",
@@ -14,7 +14,7 @@ Future<Map<String, dynamic>> httpGet({required String path}) async {
     try {
       Map<String, dynamic> resBody =
       jsonDecode(utf8.decode(response.bodyBytes));
-      resBody['statusCode'] = response.statusCode;
+      print(resBody);
       return resBody;
     } catch (e) {
       // response body가 json이 아닌 경우
@@ -29,7 +29,7 @@ Future<Map<String, dynamic>> httpGet({required String path}) async {
 
 Future<int> httpPost({required String path, Map? data}) async {
 // return type: int => post 잘 됐는지 여부만 확인
-  baseUrl = baseUrl+path;
+  String baseUrl = 'http://223.130.157.192:8080$path';
   var body = jsonEncode(data);
 
   try {
