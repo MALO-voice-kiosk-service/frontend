@@ -70,12 +70,32 @@ class CommViewPageState extends State<CommViewPage> {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    apiResult!['data'][index].toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16.0,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // 왼쪽 게시글 정보
+                              Text(
+                                apiResult!['data'][index]['post_title'].toString(),
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                apiResult!['data'][index]['location'].toString(),
+                              ),
+                        ],
+                      ),
+                      // 오른쪽 사진 정보
+                      Container(
+                        child: Image.asset('lib/assets/defaultImg.png'),
+                        width: MediaQuery.of(context).size.width*(1/3),
+                      ),
+                    ],
                   ),
                 );
               },
