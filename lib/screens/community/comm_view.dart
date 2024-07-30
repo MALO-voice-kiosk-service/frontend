@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:sparcs_2024_frontend/screens/community/comm_upload.dart';
-
 import '../../service/api.dart';
 
 class CommViewPage extends StatefulWidget {
