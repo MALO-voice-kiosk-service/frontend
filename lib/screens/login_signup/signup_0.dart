@@ -12,6 +12,9 @@ class Signup0Page extends StatefulWidget {
 }
 
 class Signup0PageState extends State<Signup0Page> {
+  // 사용자 or 클래스선생님
+  static int userMode = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +109,8 @@ class Signup0PageState extends State<Signup0Page> {
                           child: ElevatedButton(
                             onPressed: (){
                               //(TODO)
-                              Get.to(() => SignupPage());
+                              userMode = 0;
+                              Get.toNamed('/signup', arguments: userMode);
                             },
                             style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white, backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
@@ -129,7 +133,8 @@ class Signup0PageState extends State<Signup0Page> {
                           child: ElevatedButton(
                             onPressed: (){
                               //(TODO)
-                              Get.to(() => SignupPage());
+                              userMode = 1;
+                              Get.toNamed('/signup', arguments: userMode);
                             },
                             style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white, backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
