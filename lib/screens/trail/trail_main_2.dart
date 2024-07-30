@@ -1,7 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_view.dart';
+
+import '../../service/api.dart';
 
 class TrailMainPage2 extends StatefulWidget {
   @override
@@ -11,6 +15,7 @@ class TrailMainPage2 extends StatefulWidget {
 class TrailMainPage2State extends State<TrailMainPage2> {
   static const keywords = ['반려견과', '동반자와', '혼자'];
   Map<int, bool> selectedKeywords = {}; // 키워드 선택 상태
+  int? selectedKeywordIndex; // 선택된 키워드 인덱스
 
   void _toggleSelection(int index) {
     setState(() {
@@ -18,8 +23,47 @@ class TrailMainPage2State extends State<TrailMainPage2> {
     });
   }
 
+  Future<void> _keywordPost(cityID, int keyword ) async {
+    // API URL을 정의합니다.
+    const String url = '/api/walkway/fetchWalkwayData';
+
+    // 요청에 포함할 데이터를 정의합니다.
+    Map<String, dynamic> data = {
+      "cityID": selectedKeywordIndex,
+      "keyword": selectedKeywordIndex
+    };
+
+    // httpPOST 함수를 호출하여 데이터를 전송합니다.
+    final response = await httpPost(path: url, data: data);
+
+    if (response == 200) {
+      // 로그인 성공 시 처리
+      Get.to(() => TrailViewPage());
+      //print('로그인 성공은 함');
+    } else {
+      // 로그인 실패 시 처리
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // 2초 후에 다이얼로그 닫기
+          Future.delayed(Duration(seconds: 1), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            title: Text('키워드 선택 실패'),
+            content: Text('위치와 키워드를 하나 이상 선택해주세요.'),
+          );
+        },
+      );
+      //print('*** Login failed ***');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments as Map<String, dynamic>;
+    final selectedCityIds = arguments['selectedCityIds'] as List<int>;
+
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -122,7 +166,6 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                                   IconButton(
                                     onPressed: () {
                                       _toggleSelection(0);
-
                                     },
                                     icon: Image.asset(
                                       'lib/assets/dog.png',
@@ -235,6 +278,12 @@ class TrailMainPage2State extends State<TrailMainPage2> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
+                  // 선택된 키워드의 인덱스 설정
+                  selectedKeywordIndex = selectedKeywords.entries
+                      .firstWhere((element) => element.value == true, orElse: () => MapEntry(-1, false))
+                      .key;
+                  print('선택된 키워드 인덱스: $selectedKeywordIndex'); // 선택된 키워드 인덱스 확인용 출력
+                  _keywordPost(selectedCityIds[0], selectedKeywordIndex!);
                   Get.to(() => TrailViewPage());
                 },
                 style: ElevatedButton.styleFrom(

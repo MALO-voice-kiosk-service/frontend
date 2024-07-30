@@ -40,6 +40,16 @@ class TrailMainPageState extends State<TrailMainPage> {
     });
   }
 
+  List<int> _getSelectedCityIds() {
+    List<int> selectedCityIds = [];
+    selectedCities.forEach((index, isSelected) {
+      if (isSelected) {
+        selectedCityIds.add(apiCityResult[index]['id']);
+      }
+    });
+    return selectedCityIds;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,7 +186,8 @@ class TrailMainPageState extends State<TrailMainPage> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => TrailMainPage2());
+                  List<int> selectedCityIds = _getSelectedCityIds();
+                  Get.to(() => TrailMainPage2(), arguments: {'selectedCityIds': selectedCityIds});
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: const Color(0xff481C75),
