@@ -10,6 +10,8 @@ class TrailMainPage extends StatefulWidget {
 
 class TrailMainPageState extends State<TrailMainPage> {
 
+  //String userNickname = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
