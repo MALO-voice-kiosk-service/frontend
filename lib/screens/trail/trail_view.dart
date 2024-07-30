@@ -51,7 +51,7 @@ class TrailViewPageState extends State<TrailViewPage> {
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.only(top: 200, bottom: 150),
+              padding: const EdgeInsets.only(top: 200, bottom: 200),
 
               child: Row(
                 children: List.generate(data.length, (index) {
@@ -69,7 +69,8 @@ class TrailViewPageState extends State<TrailViewPage> {
                     child: Center(
                       child: TextButton(
                         onPressed: () {
-                          null;
+                          Get.to(() => TrailDetailPage());
+                          // 완전 센터 눌러야 해요
                           //(TODO) 추천 지도 get해와서 띄우기
                         },
                         child: Text(
@@ -82,31 +83,6 @@ class TrailViewPageState extends State<TrailViewPage> {
                     ),
                   );
                 }),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              alignment: Alignment.bottomRight,
-              margin: EdgeInsets.symmetric(
-                horizontal: (MediaQuery.of(context).size.width) * (1 / 5),
-              ),
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.to(() => TrailDetailPage());
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
-                  ),
-                ),
-                child: const Text(
-                  '세부페이지이동(임시)',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
               ),
             ),
           ],
