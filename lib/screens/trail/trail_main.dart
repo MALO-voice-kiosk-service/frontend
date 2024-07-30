@@ -24,10 +24,10 @@ class TrailMainPageState extends State<TrailMainPage> {
               ),
               Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RichText(
                           text: TextSpan(
@@ -52,20 +52,24 @@ class TrailMainPageState extends State<TrailMainPage> {
                         ),
                       ],
                     ),
-                    const Text(
-                      '산책 루트를 안내합니다.',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: const Text(
+                        '산책 루트를 안내합니다.',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
               Container(
-                height: 40,
+                height: 10,
               ),
               Container(
+                alignment: Alignment.topLeft,
                 child: const Text(
                   '이유민님, 반가워요 !',
                   style: TextStyle(
@@ -75,9 +79,10 @@ class TrailMainPageState extends State<TrailMainPage> {
                 ),
               ),
               Container(
-                height: 50,
+                height: 40,
               ),
               Container(
+                alignment: Alignment.topLeft,
                 child: const Text(
                   '산책할 지역을 선택해주세요',
                   style: TextStyle(

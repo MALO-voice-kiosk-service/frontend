@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_view.dart';
 
 class TrailMainPage2 extends StatefulWidget {
   @override
@@ -24,10 +25,10 @@ class TrailMainPage2State extends State<TrailMainPage2> {
               ),
               Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RichText(
                           text: TextSpan(
@@ -52,20 +53,24 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                         ),
                       ],
                     ),
-                    const Text(
-                      '산책 루트를 안내합니다.',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: const Text(
+                        '산책 루트를 안내합니다.',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
               Container(
-                height: 40,
+                height: 10,
               ),
               Container(
+                alignment: Alignment.topLeft,
                 child: const Text(
                   '이유민님, 반가워요 !',
                   style: TextStyle(
@@ -75,9 +80,10 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                 ),
               ),
               Container(
-                height: 50,
+                height: 40,
               ),
               Container(
+                alignment: Alignment.topLeft,
                 child: const Text(
                   '산책 루트 추천을 위한 키워드를 선택해주세요',
                   style: TextStyle(
@@ -116,11 +122,12 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                 height: 10,
               ),
               Container(
+                  //alignment: Alignment.centerRight,
                   margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      Get.to(() => TrailDetailPage());
+                      Get.to(() => TrailViewPage());
                     },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: const Color(0xff481C75),
