@@ -16,6 +16,9 @@ class NeuruApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: LoadingPage(),
+      theme: ThemeData(
+        splashFactory: NoSplash.splashFactory,
+      ),
     );
   }
 
