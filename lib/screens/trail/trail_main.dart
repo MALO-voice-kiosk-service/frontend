@@ -160,10 +160,22 @@ class TrailMainPageState extends State<TrailMainPage> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width - 40,
-                height: MediaQuery.of(context).size.height - 700,
-                color: Colors.grey,
-                child: Text(
-                  '광고'
+                height: MediaQuery.of(context).size.height * (1/7),
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: Colors.black38,
+                    )
+                ),
+                child: Center(
+                  child: Text(
+                    '광고',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               )
             ],

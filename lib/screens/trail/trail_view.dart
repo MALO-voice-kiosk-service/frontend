@@ -27,13 +27,6 @@ class TrailViewPageState extends State<TrailViewPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            IconButton(
-                icon: const Icon(FeatherIcons.edit),
-                color: Colors.black,
-                onPressed: () {
-                  null;
-                }
-            ),
           ],
         ),
       ),
