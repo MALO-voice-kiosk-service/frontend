@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sparcs_2024_frontend/screens/chat/chat_view.dart';
 import 'package:sparcs_2024_frontend/screens/community/comm_view.dart';
 import 'package:sparcs_2024_frontend/screens/loading.dart';
 import 'package:sparcs_2024_frontend/screens/mypage/mypage_view.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_main.dart';
-import 'package:sparcs_2024_frontend/screens/trail/trail_view.dart';
 
 void main(){
   runApp(NeuruApp());
