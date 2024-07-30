@@ -61,6 +61,7 @@ class LoginPageState extends State<LoginPage> {
     if (response == 200) {
       // 로그인 성공 시 처리
       Get.to(() => MainPage());
+      //print('로그인 성공은 함');
     } else {
       // 로그인 실패 시 처리
       showDialog(
