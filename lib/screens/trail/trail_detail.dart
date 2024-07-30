@@ -207,26 +207,26 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                               return Container(
                                 child: Column(
                                   children: [
-                                Container(
-                                width: MediaQuery.of(context).size.width - 40,
-                                height: 100, //(TODO) 내용 맞춰서
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(
-                                    color: Colors.black38,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '리뷰 가져와야 함', //(TODO) 리뷰
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.black,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 40,
+                                      height: 100, //(TODO) 내용 맞춰서
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                          color: Colors.black38,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '리뷰 가져와야 함', //(TODO) 리뷰
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                            ),
+                                            ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -235,11 +235,6 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                               );
                             }
                       )
-
-
-
-
-
                       )
                     ],
                   ),
