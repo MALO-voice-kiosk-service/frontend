@@ -15,6 +15,10 @@ class CommViewPageState extends State<CommViewPage> {
 
   Map<String, dynamic>? apiResult;
   Map<String, dynamic>? apiPostResult;
+  Map<String, dynamic>? apiCommentResult;
+
+  final TextEditingController commentController = TextEditingController();
+  String comment = "";
 
   bool isJoinSelected = true;
 
@@ -22,6 +26,18 @@ class CommViewPageState extends State<CommViewPage> {
   void initState() {
     super.initState();
     _fetchData();
+
+    commentController.addListener(() {
+      setState(() {
+        comment = commentController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    commentController.dispose();
+    super.dispose();
   }
 
   // 게시글 전체
@@ -30,6 +46,27 @@ class CommViewPageState extends State<CommViewPage> {
     setState(() {
       apiResult = result;
     });
+  }
+
+  // 댓글 전체
+  Future<void> _fetchCommentData(int postId) async {
+    final result = await httpGet(path: '/api/post/comment/$postId');
+    setState(() {
+      apiCommentResult = result;
+    });
+  }
+
+  // comment 업로드
+  Future<void> uploadComment(int postId) async {
+    String url = '/api/post/comment/$postId';
+    final response = await httpPostString(path: url, data: comment);
+
+    if (response == 200) {
+      print('*** Upload Successed ***');
+      _fetchCommentData(postId);
+    } else {
+      print('*** Upload failed ***');
+    }
   }
 
   void showDetails(BuildContext context, int id){
@@ -49,18 +86,7 @@ class CommViewPageState extends State<CommViewPage> {
           ),
           child: Container(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 5,
-                  width: MediaQuery.of(context).size.width*(1/4),
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.all(Radius.circular(45)),
-                  ),
-                ),
-                SingleChildScrollView(
+            child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -120,11 +146,55 @@ class CommViewPageState extends State<CommViewPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      SizedBox(height: 10,),
+                      Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
+                          )
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width*(2/3),
+                              child: TextFormField(
+                                controller: commentController,
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: IconButton(
+                                icon: Icon(Icons.send_rounded),
+                                color: Colors.grey,
+                                onPressed: () {
+                                  uploadComment(id);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      apiCommentResult == null
+                          ? Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: (apiCommentResult!['data'] as List).length,
+                        itemBuilder: (context, index) {
+                          final commentData = (apiCommentResult!['data'] as List)[index];
+                          return ListTile(
+                            title: Text(commentData['comment_content']),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
           ),
         );
       },
@@ -136,6 +206,7 @@ class CommViewPageState extends State<CommViewPage> {
   Future<void> _fetchPostData(BuildContext context, int id) async {
     print('id: $id');
     final result = await httpGet(path: '/api/post/$id');
+    await _fetchCommentData(id);
     setState(() {
       apiPostResult = result;
     });
@@ -204,7 +275,7 @@ class CommViewPageState extends State<CommViewPage> {
                   child: const Text(
                     '친목',
                     style: TextStyle(
-                        color: Colors.white,
+                      color: Colors.white,
                     ),
                   ),
                 ),

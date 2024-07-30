@@ -43,3 +43,22 @@ Future<int> httpPost({required String path, Map? data}) async {
     return 503;
   }
 }
+
+Future<int> httpPostString({required String path, required String data}) async {
+// return type: int => post 잘 됐는지 여부만 확인
+  String baseUrl = 'http://223.130.157.192:8080$path';
+  var body = jsonEncode(data);
+
+  try {
+    http.Response response =
+    await http.post(Uri.parse(baseUrl), body: body, headers: {
+      "accept": "application/json",
+      "Content-Type": "application/json",
+    });
+    return response.statusCode;
+
+  } catch (e) {
+    print("httpPost error: $e");
+    return 503;
+  }
+}
