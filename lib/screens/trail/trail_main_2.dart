@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
 
 class TrailMainPage2 extends StatefulWidget {
   @override
@@ -119,7 +120,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      null;
+                      Get.to(() => TrailDetailPage());
                     },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: const Color(0xff481C75),
