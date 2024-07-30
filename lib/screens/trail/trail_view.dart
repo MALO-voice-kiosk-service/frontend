@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_showpin.dart';
 
 class TrailViewPage extends StatefulWidget {
   @override
