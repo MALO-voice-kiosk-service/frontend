@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:sparcs_2024_frontend/screens/community/comm_upload.dart';
 
+import '../../service/api.dart';
+
 class CommViewPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => CommViewPageState();
@@ -12,7 +14,20 @@ class CommViewPage extends StatefulWidget {
 
 class CommViewPageState extends State<CommViewPage> {
 
-  static const data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; // 받아온 data
+  Map<String, dynamic>? apiResult;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final result = await httpGet(path: '/api/post');
+    setState(() {
+      apiResult = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +58,24 @@ class CommViewPageState extends State<CommViewPage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body: apiResult == null
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
             ListView.builder(
               shrinkWrap: true,
-              itemCount: data.length,
+              physics: NeverScrollableScrollPhysics(), // 리스트 스크롤 중복 방지
+              itemCount: (apiResult!['data'] as List).length,
               itemBuilder: (BuildContext context, int index) {
-                return SingleChildScrollView(
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    data[index],
+                    apiResult!['data'][index].toString(),
                     style: const TextStyle(
                       color: Colors.black,
+                      fontSize: 16.0,
                     ),
                   ),
                 );
