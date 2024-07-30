@@ -214,7 +214,6 @@ class CommViewPageState extends State<CommViewPage> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

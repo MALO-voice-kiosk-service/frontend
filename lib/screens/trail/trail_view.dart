@@ -5,6 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_use.dart';
 
+import '../../service/api.dart';
+
 class TrailViewPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => TrailViewPageState();
@@ -59,11 +61,14 @@ class TrailViewPageState extends State<TrailViewPage> {
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 return SingleChildScrollView(
-                  child: Text(
-                    data[index],
-                    style: const TextStyle(
-                      color: Colors.black,
-                    ),
+                  child: TextButton(
+                    onPressed: (){},
+                    child: Text(
+                      data[index],
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    )
                   ),
                 );
               },
