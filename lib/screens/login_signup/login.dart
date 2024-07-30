@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/login_signup/signup.dart';
-import 'package:sparcs_2024_frontend/screens/login_signup/signup_0.dart';
 import '../../service/api.dart';
 import '../main.dart';
 

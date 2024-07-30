@@ -72,7 +72,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  '이유민님, 반가워요 !',
+                  'yumin 님ㅛ 반가워요 !',
                   style: TextStyle(
                       fontSize: 17
                   ),
