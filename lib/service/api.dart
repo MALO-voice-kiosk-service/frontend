@@ -3,7 +3,6 @@ import 'dart:convert';
 
 Future<Map<String, dynamic>> httpGet({required String path}) async {
   String baseUrl = 'http://223.130.157.192:8080$path';
-  print(baseUrl);
 
   try {
     http.Response response = await http.get(Uri.parse(baseUrl), headers: {
@@ -14,7 +13,6 @@ Future<Map<String, dynamic>> httpGet({required String path}) async {
     try {
       Map<String, dynamic> resBody =
       jsonDecode(utf8.decode(response.bodyBytes));
-      print(resBody);
       return resBody;
     } catch (e) {
       // response body가 json이 아닌 경우
