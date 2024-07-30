@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
-import 'package:sparcs_2024_frontend/screens/trail/trail_use.dart';
-
-import '../../service/api.dart';
 
 class TrailViewPage extends StatefulWidget {
   @override
@@ -13,12 +8,10 @@ class TrailViewPage extends StatefulWidget {
 }
 
 class TrailViewPageState extends State<TrailViewPage> {
-
   static const data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; // 받아온 data
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -56,49 +49,69 @@ class TrailViewPageState extends State<TrailViewPage> {
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return SingleChildScrollView(
-                  child: TextButton(
-                    onPressed: (){},
-                    child: Text(
-                      data[index],
-                      style: const TextStyle(
-                        color: Colors.black,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(top: 200, bottom: 150),
+
+              child: Row(
+                children: List.generate(data.length, (index) {
+                  return Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.black38,
                       ),
-                    )
-                  ),
-                );
-              },
+                    ),
+                    child: Center(
+                      child: TextButton(
+                        onPressed: () {
+                          null;
+                          //(TODO) 추천 지도 get해와서 띄우기
+                        },
+                        child: Text(
+                          data[index],
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
             ),
+            SizedBox(height: 20),
             Container(
-                alignment: Alignment.bottomRight,
-                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    Get.to(() => TrailDetailPage());
-                  },
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: const Color(0xff481C75),
-                      padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
-                      )
+              alignment: Alignment.bottomRight,
+              margin: EdgeInsets.symmetric(
+                horizontal: (MediaQuery.of(context).size.width) * (1 / 5),
+              ),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.to(() => TrailDetailPage());
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
                   ),
-                  child: const Text('세부페이지이동(임시)',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),),
-                )
+                ),
+                child: const Text(
+                  '세부페이지이동(임시)',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-
 }
