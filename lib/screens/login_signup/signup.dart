@@ -12,6 +12,8 @@ class SignupPage extends StatefulWidget {
 
 class SignupPageState extends State<SignupPage> {
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,18 +28,17 @@ class SignupPageState extends State<SignupPage> {
               ),
               Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   const Text(
-                  '안녕하세요,',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
+                    '안녕하세요,',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
                     Row(
-
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RichText(
                           text: TextSpan(
@@ -70,12 +71,12 @@ class SignupPageState extends State<SignupPage> {
                 height: 50,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/7), 0, (MediaQuery.of(context).size.width)*(1/7), 0),
                 child: TextFormField(
                   key: const ValueKey(1),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
-                      Icons.person,
+                      Icons.face,
                       color: Colors.grey,
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -94,7 +95,7 @@ class SignupPageState extends State<SignupPage> {
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -105,7 +106,7 @@ class SignupPageState extends State<SignupPage> {
                 height: 40,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/7), 0, (MediaQuery.of(context).size.width)*(1/7), 0),
                 child: TextFormField(
                   key: const ValueKey(1),
                   decoration: const InputDecoration(
@@ -129,7 +130,7 @@ class SignupPageState extends State<SignupPage> {
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -140,7 +141,7 @@ class SignupPageState extends State<SignupPage> {
                 height: 40,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/7), 0, (MediaQuery.of(context).size.width)*(1/7), 0),
                 child: TextFormField(
                   key: const ValueKey(1),
                   decoration: const InputDecoration(
@@ -164,7 +165,7 @@ class SignupPageState extends State<SignupPage> {
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -175,12 +176,12 @@ class SignupPageState extends State<SignupPage> {
                 height: 40,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/7), 0, (MediaQuery.of(context).size.width)*(1/7), 0),
                 child: TextFormField(
                   key: const ValueKey(1),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
-                      Icons.person,
+                      Icons.abc,
                       color: Colors.grey,
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -195,11 +196,11 @@ class SignupPageState extends State<SignupPage> {
                         Radius.circular(10),
                       ),
                     ),
-                    hintText: "별명(닉네임) 입력",
+                    hintText: "닉네임 입력",
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -210,7 +211,7 @@ class SignupPageState extends State<SignupPage> {
                 height: 40,
               ),
               Container(
-                  margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                  margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/7), 0, (MediaQuery.of(context).size.width)*(1/7), 0),
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
@@ -226,7 +227,7 @@ class SignupPageState extends State<SignupPage> {
                     child: const Text('회원가입 하기',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        //fontWeight: FontWeight.bold,
                       ),),
                   )
               ),

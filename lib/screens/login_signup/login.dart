@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/login_signup/signup.dart';
+import 'package:sparcs_2024_frontend/screens/login_signup/signup_0.dart';
 import '../../service/api.dart';
 import '../main.dart';
 
@@ -134,7 +135,7 @@ class LoginPageState extends State<LoginPage> {
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -174,7 +175,7 @@ class LoginPageState extends State<LoginPage> {
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      //fontWeight: FontWeight.bold,
                     ),
                     contentPadding: EdgeInsets.all(10),
                   ),
@@ -206,7 +207,7 @@ class LoginPageState extends State<LoginPage> {
                       '로그인',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        //fontWeight: FontWeight.bold,
                       ),
                     ),
                   )),
@@ -222,7 +223,7 @@ class LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(() => SignupPage());
+                      Get.to(() => Signup0Page());
                     },
                     style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,
@@ -237,7 +238,7 @@ class LoginPageState extends State<LoginPage> {
                       '회원가입',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        //fontWeight: FontWeight.bold,
                       ),
                     ),
                   )),

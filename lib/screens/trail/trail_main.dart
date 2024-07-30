@@ -138,10 +138,11 @@ class TrailMainPageState extends State<TrailMainPage> {
                 ),
               ),
               Container(
-                height: 10,
+                height: 2,
               ),
               Container(
-                  margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*(1/5), 0, (MediaQuery.of(context).size.width)*(1/5), 0),
+                  alignment: Alignment.bottomRight,
+                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
@@ -182,6 +183,9 @@ class TrailMainPageState extends State<TrailMainPage> {
                     ),
                   ),
                 ),
+              ),
+              Container(
+                height: 10,
               )
             ],
           ),
