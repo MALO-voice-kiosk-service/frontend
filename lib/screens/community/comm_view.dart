@@ -14,6 +14,9 @@ class CommViewPage extends StatefulWidget {
 class CommViewPageState extends State<CommViewPage> {
 
   Map<String, dynamic>? apiResult;
+  Map<String, dynamic>? apiPostResult;
+
+  bool isJoinSelected = true;
 
   @override
   void initState() {
@@ -21,6 +24,7 @@ class CommViewPageState extends State<CommViewPage> {
     _fetchData();
   }
 
+  // 게시글 전체
   Future<void> _fetchData() async {
     final result = await httpGet(path: '/api/post');
     setState(() {
@@ -28,8 +32,10 @@ class CommViewPageState extends State<CommViewPage> {
     });
   }
 
-  void showDetails(BuildContext context, int index){
-    showModalBottomSheet(
+  void showDetails(BuildContext context, int id){
+    apiPostResult == null
+        ? Center(child: CircularProgressIndicator())
+        : showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -60,7 +66,7 @@ class CommViewPageState extends State<CommViewPage> {
                     children: [
                       const SizedBox(height: 20,),
                       Text(
-                        apiResult!['data'][index]['post_title'].toString(),
+                        apiPostResult!['data']['post_title'].toString(),
                         style: const TextStyle(
                           color: const Color(0xff481C75),
                           fontSize: 16.0,
@@ -83,7 +89,7 @@ class CommViewPageState extends State<CommViewPage> {
                           ),
                           SizedBox(width: 10,),
                           Text(
-                            apiResult!['data'][index]['location'].toString(),
+                            apiPostResult!['data']['location'].toString(),
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 15.0,
@@ -94,7 +100,7 @@ class CommViewPageState extends State<CommViewPage> {
                       ),
                       SizedBox(height: 10,),
                       Text(
-                        apiResult!['data'][index]['post_content'].toString(),
+                        apiPostResult!['data']['post_content'].toString(),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 15.0,
@@ -125,6 +131,18 @@ class CommViewPageState extends State<CommViewPage> {
       backgroundColor: Colors.transparent, // 앱 <=> 모달의 여백 부분을 투명하게 처리
     );
   }
+
+  // 특정 게시물
+  Future<void> _fetchPostData(BuildContext context, int id) async {
+    print('id: $id');
+    final result = await httpGet(path: '/api/post/$id');
+    setState(() {
+      apiPostResult = result;
+    });
+    showDetails(context, id);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,15 +182,67 @@ class CommViewPageState extends State<CommViewPage> {
           : SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      isJoinSelected = true;
+                    });
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                      if(isJoinSelected){
+                        return const Color(0xff481C75);
+                      }
+                      return Colors.grey;
+                    }),
+                    fixedSize: WidgetStateProperty.all<Size>(Size(80, 30)),
+                  ),
+                  child: const Text(
+                    '친목',
+                    style: TextStyle(
+                        color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10,),
+                ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      isJoinSelected = false;
+                    });
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                      if(!isJoinSelected){
+                        return const Color(0xff481C75);
+                      }
+                      return Colors.grey;
+                    }),
+                    fixedSize: WidgetStateProperty.all<Size>(Size(80, 30)),
+                  ),
+                  child: const Text(
+                    '홍보',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(), // 리스트 스크롤 중복 방지
-              itemCount: (apiResult!['data'] as List).length,
+              itemCount: (apiResult!['data'] as List).where((item) => isJoinSelected ? item['post_tag'] == 0 : item['post_tag'] == 1).length,
               itemBuilder: (BuildContext context, int index) {
+                final filteredData = (apiResult!['data'] as List).where((item) => isJoinSelected ? item['post_tag'] == 0 : item['post_tag'] == 1).toList();
                 return ElevatedButton(
                   onPressed: (){
-                    showDetails(context, index);
+                    int id = filteredData[index]['id'];
+                    _fetchPostData(context, id);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -191,43 +261,42 @@ class CommViewPageState extends State<CommViewPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // 왼쪽 게시글 정보
-                                    Text(
-                                      apiResult!['data'][index]['post_title'].toString(),
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
+                                Text(
+                                  filteredData[index]['post_title'].toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 20,
+                                      width: 30,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xff481C75),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Text(
+                                        filteredData[index]['post_tag'] == 0 ? '친목' : '홍보',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
                                       ),
                                     ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          height: 20,
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xff481C75),
-                                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                          child: Text(
-                                            apiResult!['data'][index]['post_tag'] == 0 ? '친목' : '홍보',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10,),
-                                        Text(
-                                          apiResult!['data'][index]['location'].toString(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
+                                    const SizedBox(width: 10,),
+                                    Text(
+                                      filteredData[index]['location'].toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                      ),
                                     ),
-
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -242,7 +311,7 @@ class CommViewPageState extends State<CommViewPage> {
                   ),
                 );
               },
-            ),
+            )
           ],
         ),
       ),
