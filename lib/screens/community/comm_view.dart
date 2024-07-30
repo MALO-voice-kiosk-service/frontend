@@ -50,8 +50,12 @@ class CommViewPageState extends State<CommViewPage> {
             IconButton(
                 icon: const Icon(FeatherIcons.edit),
                 color: Colors.black,
-                onPressed: () {
-                  Get.to(() => CommUploadPage());
+                onPressed: () async {
+                  final result = await Get.to(CommUploadPage());
+                  print("get result: $result");
+                  if (result == true) {
+                    await _fetchData();
+                  }
                 }
             ),
           ],
@@ -171,33 +175,64 @@ class CommViewPageState extends State<CommViewPage> {
                     elevation: 0,
                     shape: BeveledRectangleBorder(),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // 왼쪽 게시글 정보
-                              Text(
-                                apiResult!['data'][index]['post_title'].toString(),
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                apiResult!['data'][index]['location'].toString(),
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                ),
-                              ),
+                          Container(
+                            width: MediaQuery.of(context).size.width*(1/3),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // 왼쪽 게시글 정보
+                                    Text(
+                                      apiResult!['data'][index]['post_title'].toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: 20,
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                            color: Color(0xff481C75),
+                                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                                            shape: BoxShape.rectangle,
+                                          ),
+                                          child: Text(
+                                            apiResult!['data'][index]['post_tag'] == 0 ? '친목' : '홍보',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10,),
+                                        Text(
+                                          apiResult!['data'][index]['location'].toString(),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                              ],
+                            ),
+                          ),
+                          // 오른쪽 사진 정보
+                          Container(
+                            width: MediaQuery.of(context).size.width*(1/3),
+                            child: Image.asset('lib/assets/defaultImg.png'),
+                          ),
                         ],
-                      ),
-                      // 오른쪽 사진 정보
-                      Container(
-                        width: MediaQuery.of(context).size.width*(1/3),
-                        child: Image.asset('lib/assets/defaultImg.png'),
                       ),
                     ],
                   ),

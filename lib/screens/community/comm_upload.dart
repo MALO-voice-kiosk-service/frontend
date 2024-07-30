@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import '../../service/api.dart';
+
 class CommUploadPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => CommUploadPageState();
@@ -12,6 +14,55 @@ class CommUploadPage extends StatefulWidget {
 class CommUploadPageState extends State<CommUploadPage> {
 
   bool isJoinSelected = true;
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController locController = TextEditingController();
+  final TextEditingController contentController = TextEditingController();
+  String title = "";
+  String loc = "";
+  String content = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    titleController.addListener(() {
+      setState(() {
+        title = titleController.text;
+      });
+    });
+
+    locController.addListener(() {
+      setState(() {
+        loc = locController.text;
+      });
+    });
+
+    contentController.addListener(() {
+      setState(() {
+        content = contentController.text;
+      });
+    });
+  }
+
+  Future<void> uploadPost() async {
+    const String url = '/api/post';
+
+    Map<String, dynamic> data = {
+      "post_title" : title,
+      "post_content" : content,
+      "post_tag" : isJoinSelected == true ? 0 : 1,
+      "location" : loc,
+    };
+
+    final response = await httpPost(path: url, data: data);
+
+    if (response == 200) {
+      print('*** Upload Successed ***');
+    } else {
+      print('*** Upload failed ***');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +75,13 @@ class CommUploadPageState extends State<CommUploadPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              IconButton(
+                  icon: const Icon(Icons.close),
+                  color: const Color(0xff481C75),
+                  onPressed: () {
+                    Get.back();
+                  }
+              ),
               const Text(
                 '게시글 쓰기',
                 style: TextStyle(
@@ -32,12 +90,18 @@ class CommUploadPageState extends State<CommUploadPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              IconButton(
-                  icon: const Icon(Icons.close),
-                  color: const Color(0xff481C75),
-                  onPressed: () {
-                    Get.back();
-                  }
+              TextButton(
+                onPressed: () async {
+                  uploadPost();
+                  Get.back(result: true);
+                },
+                child: const Text(
+                  '등록',
+                  style: TextStyle(
+                    color: Color(0xff481C75),
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ],
           ),
@@ -125,6 +189,8 @@ class CommUploadPageState extends State<CommUploadPage> {
                             ),
                           ),
                           TextFormField(
+                            controller: titleController,
+
                           ),
                           const SizedBox(height: 5,),
                           const Text(
@@ -134,6 +200,7 @@ class CommUploadPageState extends State<CommUploadPage> {
                             ),
                           ),
                           TextFormField(
+                            controller: locController,
                           ),
                           const SizedBox(height: 5,),
                           const Text(
@@ -174,10 +241,11 @@ class CommUploadPageState extends State<CommUploadPage> {
                             width: MediaQuery.of(context).size.width - 60,
                             height: 500,
                             padding: EdgeInsets.all(20),
-                            child: const TextField(
+                            child: TextField(
+                              controller: contentController,
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                 ),
