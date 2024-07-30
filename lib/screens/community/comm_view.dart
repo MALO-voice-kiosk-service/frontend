@@ -28,6 +28,104 @@ class CommViewPageState extends State<CommViewPage> {
     });
   }
 
+  void showDetails(BuildContext context, int index){
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            color: Colors.white, // 모달 배경색
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 5,
+                  width: MediaQuery.of(context).size.width*(1/4),
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(45)),
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20,),
+                      Text(
+                        apiResult!['data'][index]['post_title'].toString(),
+                        style: const TextStyle(
+                          color: const Color(0xff481C75),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.asset('lib/assets/defaultImg.png'),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            '위치',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Text(
+                            apiResult!['data'][index]['location'].toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+                      Text(
+                        apiResult!['data'][index]['post_content'].toString(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '댓글',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      backgroundColor: Colors.transparent, // 앱 <=> 모달의 여백 부분을 투명하게 처리
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,101 +172,7 @@ class CommViewPageState extends State<CommViewPage> {
               itemBuilder: (BuildContext context, int index) {
                 return ElevatedButton(
                   onPressed: (){
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(
-                            color: Colors.white, // 모달 배경색
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                      height: 5,
-                                      width: MediaQuery.of(context).size.width*(1/4),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.grey,
-                                        borderRadius: BorderRadius.all(Radius.circular(45)),
-                                      ),
-                                ),
-                                SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(height: 20,),
-                                      Text(
-                                            apiResult!['data'][index]['post_title'].toString(),
-                                            style: const TextStyle(
-                                              color: const Color(0xff481C75),
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                      Container(
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Image.asset('lib/assets/defaultImg.png'),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '위치',
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 10,),
-                                          Text(
-                                            apiResult!['data'][index]['location'].toString(),
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10,),
-                                      Text(
-                                        apiResult!['data'][index]['post_content'].toString(),
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15.0,
-                                        ),
-                                      ),
-                                      const Divider(
-                                        color: Colors.grey,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        '댓글',
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                                                          ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      backgroundColor: Colors.transparent, // 앱 <=> 모달의 여백 부분을 투명하게 처리
-                    );
+                    showDetails(context, index);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
