@@ -74,8 +74,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
       ),
       body: Stack(
         children: [
-          // TODO
-          NaverMapWidget(isDetailedMap: true, lineString: lineString,),
+          PinnedMapPage(isDetailedMap: true, lineString: lineString, pinTag: locationTag,),
           Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(left: 10, right: 10),
@@ -89,6 +88,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                     onPressed: (){
                       setState(() {
                         locationTag = 0;
+                        print('pinTag: $locationTag');
                       });
                     },
                     style: ButtonStyle(
@@ -121,48 +121,12 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                     ),
                   ),
                   SizedBox(width: 10,),
-                  // 충전기 버튼
-                  ElevatedButton(
-                    onPressed: (){
-                      setState(() {
-                        locationTag = 1;
-                      });
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-                        if(locationTag == 1){
-                          return const Color(0xff481C75);
-                        }
-                        return Colors.grey;
-                      }),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          child: Image.asset(
-                            'lib/assets/images/wheelchair_2.png',
-                            fit: BoxFit.contain,
-                          ),
-                          width: 20,
-                          height: 20,
-                        ),
-                        SizedBox(width: 10,),
-                        const Text(
-                          '급속충전기',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 10,),
                   // 영화관 버튼
                   ElevatedButton(
                     onPressed: (){
                       setState(() {
                         locationTag = 2;
+                        print('pinTag: $locationTag');
                       });
                     },
                     style: ButtonStyle(
@@ -194,6 +158,44 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                       ],
                     ),
                   ),
+                  SizedBox(width: 10,),
+                  // 충전기 버튼
+                  ElevatedButton(
+                    onPressed: (){
+                      setState(() {
+                        locationTag = 1;
+                        print('pinTag: $locationTag');
+                      });
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                        if(locationTag == 1){
+                          return const Color(0xff481C75);
+                        }
+                        return Colors.grey;
+                      }),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            'lib/assets/images/wheelchair_2.png',
+                            fit: BoxFit.contain,
+                          ),
+                          width: 20,
+                          height: 20,
+                        ),
+                        SizedBox(width: 10,),
+                        const Text(
+                          '급속충전기',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -203,7 +205,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
                 onPressed: (){
-                  Get.to(() => TrailEndPage());
+                  Get.to(TrailEndPage());
                 },
                 child: const Text(
                   '산책 끝내기',

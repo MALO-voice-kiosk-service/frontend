@@ -26,7 +26,6 @@ Future<Map<String, dynamic>> httpGet({required String path}) async {
 }
 
 Future<Map<String, dynamic>> httpPostForMap({required String path, Map? data}) async {
-// return type: int => post 잘 됐는지 여부만 확인
   String baseUrl = 'http://223.130.157.192:8080$path';
   var body = jsonEncode(data);
 
