@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:developer';
@@ -112,8 +114,9 @@ class PinnedMapPage extends StatefulWidget {
   final bool isDetailedMap;
   final String lineString;
   final int pinTag;
+  final String walkway_id;
 
-  PinnedMapPage({Key? key, required this.isDetailedMap, required this.lineString, required this.pinTag}) : super(key: key);
+  PinnedMapPage({Key? key, required this.isDetailedMap, required this.lineString, required this.pinTag, required this.walkway_id}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PinnedMapPageState();
@@ -127,6 +130,7 @@ class PinnedMapPageState extends State<PinnedMapPage> {
   late String _lineString = widget.lineString;
   late bool isDetailedMap = widget.isDetailedMap;
   late int pinTag = widget.pinTag;
+  late String walkway_id = widget.walkway_id;
   late List<NLatLng> _coordinates;
   late List<NLatLng> pinCoordinates = [];
   Map<String, dynamic>? apiResult;
@@ -150,7 +154,7 @@ class PinnedMapPageState extends State<PinnedMapPage> {
   }
 
   Future<void> fetchPinData() async {
-    final result = await httpGet(path: '/api/location?category=$pinTag');
+    final result = await httpGet(path: '/api/location?category=$pinTag&walkway_id=$walkway_id');
     setState(() {
       apiResult = result;
       print('pin api result: $apiResult');
@@ -196,7 +200,7 @@ class PinnedMapPageState extends State<PinnedMapPage> {
     if (_mapController != null) {
       // Remove all existing markers
       for (var marker in newMarkers) {
-        await _mapController!.deleteOverlay(marker.info);
+        _mapController!.deleteOverlay(marker.info);
       }
       newMarkers.clear();
 
@@ -230,18 +234,16 @@ class PinnedMapPageState extends State<PinnedMapPage> {
         } else {
           // SDK is initialized, show the map
           return Container(
-            width: MediaQuery.of(context).size.width, // Adjust width as needed
-            height: MediaQuery.of(context).size.height, // Adjust height as needed
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: NaverMap(
               options: NaverMapViewOptions(
                 initialCameraPosition: NCameraPosition(
                   target: _coordinates[(_coordinates.length / 2).toInt()],
-                  zoom: 15, // Adjust the zoom level as needed
+                  zoom: 15,
                 ),
                 locationButtonEnable: false,
-                // 위치 버튼 표시 여부 설정
                 consumeSymbolTapEvents: false,
-                // 심볼 탭 이벤트 소비 여부 설정
                 mapType: NMapType.basic,
                 liteModeEnable: true,
               ),
@@ -250,7 +252,6 @@ class PinnedMapPageState extends State<PinnedMapPage> {
                 _mapController = controller;
                 log("onMapReady", name: "onMapReady");
 
-                // Add polyline
                 final polylineOverlay = NPolylineOverlay(
                   id: 'polyline',
                   coords: _coordinates,
@@ -259,7 +260,6 @@ class PinnedMapPageState extends State<PinnedMapPage> {
                 );
                 controller.addOverlay(polylineOverlay);
 
-                // Initial marker setup if detailed map
                 if (isDetailedMap) {
                   await _updateMapMarkers();
                 }
