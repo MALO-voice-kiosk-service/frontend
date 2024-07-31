@@ -4,6 +4,10 @@ import 'dart:developer';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class NaverMapWidget extends StatefulWidget {
+  final bool isDetailedMap;
+
+  NaverMapWidget({Key? key, required this.isDetailedMap}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => NaverMapWidgetState();
 }
@@ -14,6 +18,7 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
 
   final String _lineString = "LINESTRING(126.943499323195 37.520708636788,126.943436448735 37.5207939689947,126.941731136119 37.5222258307638,126.941503970211 37.5223374257687,126.941296439188 37.5224716470201,126.941191124405 37.5225567772175,126.940822855245 37.5226203822069)";
   late List<NLatLng> _coordinates;
+  final NLatLng _detailedCoordinate = NLatLng(37.520708636788, 126.943499323195); // 표시할 좌표
 
   @override
   void initState() {
@@ -81,6 +86,15 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
                   width: 5,
                 );
                 controller.addOverlay(polylineOverlay);
+
+                // If isDetailedMap is true, add a marker at the specific coordinate
+                if (widget.isDetailedMap) {
+                  final markerOverlay = NMarker(
+                    id: 'detailed_marker',
+                    position: _detailedCoordinate,
+                  );
+                  controller.addOverlay(markerOverlay);
+                }
               },
             ),
           );

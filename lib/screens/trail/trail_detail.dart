@@ -136,15 +136,15 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                         height: MediaQuery.of(context).size.height * (1 / 5),
                         child: Stack(
                           children: [
-                            NaverMapWidget(),
+                            NaverMapWidget(isDetailedMap: false,),
                             Container(
                               margin: EdgeInsets.all(10),
                               child: ElevatedButton(
                                   onPressed: (){
-                                    Get.to(ShowTrailPinPage());
+                                    Get.to(ShowTrailPinPage(), arguments: true);
                                   },
                                   child: const Text(
-                                    '자세한 정보 보기',
+                                    '산책 시작하기',
                                     style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.white,
