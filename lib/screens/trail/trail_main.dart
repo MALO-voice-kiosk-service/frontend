@@ -55,11 +55,31 @@ class TrailMainPageState extends State<TrailMainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        toolbarHeight: 50,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 80,
+        ),
+            IconButton(
+                icon: const Icon(Icons.close),
+                color: const Color(0xff481C75),
+                onPressed: () {
+                  Get.back();
+                }
+            ),
+
+        ]
+        )
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
-            SizedBox(height: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
