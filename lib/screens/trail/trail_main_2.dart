@@ -29,11 +29,13 @@ class TrailMainPage2State extends State<TrailMainPage2> {
 
     // 요청에 포함할 데이터를 정의합니다.
     Map<String, dynamic> data = {
-      "cityID": selectedKeywordIndex,
+      "cityID": cityID,
       "keyword": selectedKeywordIndex
     };
 
     // httpPOST 함수를 호출하여 데이터를 전송합니다.
+    print('data :');
+    print(data);
     final response = await httpPost(path: url, data: data);
 
     if (response == 200) {
@@ -282,9 +284,10 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                   selectedKeywordIndex = selectedKeywords.entries
                       .firstWhere((element) => element.value == true, orElse: () => MapEntry(-1, false))
                       .key;
+                  print(selectedCityIds);
                   print('선택된 키워드 인덱스: $selectedKeywordIndex'); // 선택된 키워드 인덱스 확인용 출력
                   _keywordPost(selectedCityIds[0], selectedKeywordIndex!);
-                  Get.to(() => TrailViewPage());
+                  //Get.to(() => TrailViewPage());
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: const Color(0xff481C75),
