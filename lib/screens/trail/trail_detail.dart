@@ -137,13 +137,27 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                         child: Stack(
                           children: [
                             NaverMapWidget(),
-                            ElevatedButton(
-                                onPressed: (){
-                                  Get.to(ShowTrailPinPage());
-                                },
-                                child: const Text(
-                                  '자세한 정보 보기'
+                            Container(
+                              margin: EdgeInsets.all(10),
+                              child: ElevatedButton(
+                                  onPressed: (){
+                                    Get.to(ShowTrailPinPage());
+                                  },
+                                  child: const Text(
+                                    '자세한 정보 보기',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(MediaQuery.of(context).size.width * (1/3),20),
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  backgroundColor: Color(0xff481C75),
                                 ),
+                              ),
                             ),
                           ],
                         ),
