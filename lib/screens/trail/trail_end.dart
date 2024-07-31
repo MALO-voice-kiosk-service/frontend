@@ -63,13 +63,13 @@ class TrailEndPageState extends State<TrailEndPage> {
                             ),
                             Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   RichText(
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: '반려견과 함께하는 공원 산책',
+                                          text: '혼자 즐기는 공원 산책',
                                           //(TODO) 산책로 이름 get해와야해요
                                           style: TextStyle(
                                             color: Colors.black,
@@ -78,16 +78,22 @@ class TrailEndPageState extends State<TrailEndPage> {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: ' 을',
+                                          text: '을',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 24,
                                           ),
                                         ),
                                       ],
+                                        style: TextStyle(
+                                          fontFamily: 'NanumSquareNeo',
+                                        )
                                     ),
+
                                   ),
+
                                 ],
+
                               ),
                             ),
                             Text(

@@ -148,7 +148,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                 SizedBox(height: 10),
                 Container(
                   width: MediaQuery.of(context).size.width - 40,
-                  height: MediaQuery.of(context).size.height - 350,
+                  height: MediaQuery.of(context).size.height - 540,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
@@ -318,7 +318,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 50),
                 Container(
                   width: MediaQuery.of(context).size.width - 40,
                   height: MediaQuery.of(context).size.height * (1 / 7),
