@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_showpin.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_use.dart';
+
+import '../../widgets/naver_map.dart';
 
 class TrailDetailPage extends StatefulWidget {
   @override
@@ -129,22 +133,19 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       SizedBox(height: 10,),
                       Container(
                         width: MediaQuery.of(context).size.width - 40,
-                        height: MediaQuery.of(context).size.height * (1 / 7),
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: Colors.black38,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '지도 가져와야 함', //(TODO) 지도
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
+                        height: MediaQuery.of(context).size.height * (1 / 5),
+                        child: Stack(
+                          children: [
+                            NaverMapWidget(),
+                            ElevatedButton(
+                                onPressed: (){
+                                  Get.to(ShowTrailPinPage());
+                                },
+                                child: const Text(
+                                  '자세한 정보 보기'
+                                ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                       const SizedBox(

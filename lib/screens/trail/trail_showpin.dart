@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:sparcs_2024_frontend/widgets/naver_map.dart';
 
 class ShowTrailPinPage extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
   Future<void> _initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
     await NaverMapSdk.instance.initialize(
-      clientId: 'r2v3jakzsi', // 클라이언트 ID 설정
+      clientId: 'r2v3jakzsi', // 클라이언트 ID
       onAuthFailed: (e) => log("네이버맵 인증오류 : $e", name: "onAuthFailed"),
     );
   }
@@ -31,31 +32,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: FutureBuilder<void>(
-        future: _initializeFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            // Show a loading spinner while the SDK is initializing
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            // Handle initialization error
-            return Center(child: Text('Error initializing Naver Map SDK'));
-          } else {
-            // SDK is initialized, show the map
-            return NaverMap(
-              options: const NaverMapViewOptions(
-                indoorEnable: true, // 실내 맵 사용 가능 여부 설정
-                locationButtonEnable: false, // 위치 버튼 표시 여부 설정
-                consumeSymbolTapEvents: false, // 심볼 탭 이벤트 소비 여부 설정
-              ),
-              onMapReady: (controller) async {
-                mapControllerCompleter.complete(controller);
-                log("onMapReady", name: "onMapReady");
-              },
-            );
-          }
-        },
-      ),
+      body: NaverMapWidget(),
     );
   }
 }
