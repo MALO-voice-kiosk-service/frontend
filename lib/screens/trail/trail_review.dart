@@ -79,6 +79,7 @@ class TrailReviewPageState extends State<TrailReviewPage> {
                   color: const Color(0xff481C75),
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NanumSquareNeo',
                 ),
               ),
               TextButton(
@@ -90,7 +91,8 @@ class TrailReviewPageState extends State<TrailReviewPage> {
                   '등록',
                   style: TextStyle(
                     color: Color(0xff481C75),
-                    fontSize: 20,
+                    fontSize: 18,
+                    fontFamily: 'NanumSquareNeo',
                   ),
                 ),
               ),
@@ -133,7 +135,7 @@ class TrailReviewPageState extends State<TrailReviewPage> {
                             child: const Text(
                               '사진을 업로드해주세요',
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
