@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:sparcs_2024_frontend/screens/login_signup/login.dart';
 import 'package:sparcs_2024_frontend/service/api.dart';
 
 import '../main.dart';
@@ -11,7 +12,7 @@ class SignupPage extends StatefulWidget {
   State<StatefulWidget> createState() => SignupPageState();
 }
 
-class SignupPageState extends State<SignupPage> {
+class SignupPageState extends State<SignupPage> with SingleTickerProviderStateMixin{
   final _formKey = GlobalKey<FormState>();
 
   //밑에서 입력받을 유저 정보
@@ -23,6 +24,9 @@ class SignupPageState extends State<SignupPage> {
   String userPw = "";
   final TextEditingController userNicknameController = TextEditingController();
   String userNickname = "";
+
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -52,6 +56,14 @@ class SignupPageState extends State<SignupPage> {
         userNickname = userNicknameController.text;
       });
     });
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
+    // 애니메이션 시작
+    _controller.forward();
   }
 
   @override
@@ -61,6 +73,7 @@ class SignupPageState extends State<SignupPage> {
     userIdController.dispose();
     userPwController.dispose();
     userNicknameController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -80,7 +93,7 @@ class SignupPageState extends State<SignupPage> {
 
       if (response == 200) {
         // 회원가입 성공
-        Get.to(() => MainPage(), arguments: userNickname);
+        Get.to(LoginPage());
       } else {
         // 회원가입 실패
         showDialog(
@@ -92,7 +105,16 @@ class SignupPageState extends State<SignupPage> {
             });
             return AlertDialog(
               title: Text('회원가입 실패'),
-              content: Text('중복 아이디가 존재합니다.'),
+              content: Container(
+                height: 200,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Divider(),
+                    Text('중복 아이디가 존재합니다.'),
+                  ],
+                ),
+              ),
             );
           },
         );
@@ -107,7 +129,16 @@ class SignupPageState extends State<SignupPage> {
           });
           return AlertDialog(
             title: Text('회원가입 실패'),
-            content: Text('각 항목의 조건을 확인하세요.'),
+            content: Container(
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Divider(),
+                  Text('각 항목의 조건을 확인하세요.'),
+                ],
+              ),
+            ),
           );
         },
       );
@@ -148,44 +179,49 @@ class SignupPageState extends State<SignupPage> {
             Container(
               height: 20,
             ),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    '안녕하세요,',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '느루',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '에 오신 걸 환영합니다.',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
+            FadeTransition(
+              opacity: _animation,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '안녕하세요,',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '느루',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareNeo',
+                                ),
+                              ),
+                              TextSpan(
+                                text: '에 오신 걸 환영합니다.',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontFamily: 'NanumSquareNeo',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -220,7 +256,7 @@ class SignupPageState extends State<SignupPage> {
                   hintText: "이름 입력",
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                   contentPadding: EdgeInsets.all(10),
                 ),
@@ -267,7 +303,7 @@ class SignupPageState extends State<SignupPage> {
                   hintText: "아이디 입력",
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                   contentPadding: EdgeInsets.all(10),
                 ),
@@ -314,7 +350,7 @@ class SignupPageState extends State<SignupPage> {
                   hintText: "비밀번호 입력",
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                   contentPadding: EdgeInsets.all(10),
                 ),
@@ -362,7 +398,7 @@ class SignupPageState extends State<SignupPage> {
                   hintText: "닉네임 입력",
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                   contentPadding: EdgeInsets.all(10),
                 ),
@@ -381,12 +417,7 @@ class SignupPageState extends State<SignupPage> {
               height: 40,
             ),
             Container(
-                margin: EdgeInsets.fromLTRB(
-                    (MediaQuery.of(context).size.width) * (1 / 7),
-                    0,
-                    (MediaQuery.of(context).size.width) * (1 / 7),
-                    0),
-                width: double.infinity,
+              width: 100,
                 child: ElevatedButton(
                   onPressed: () {
                     _signup();
@@ -396,12 +427,12 @@ class SignupPageState extends State<SignupPage> {
                       backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
                       padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
+                        borderRadius: BorderRadius.circular(45), // 모서리를 둥글게 설정
                       )),
                   child: const Text(
-                    '회원가입 하기',
+                    '회원가입',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 11,
                     ),
                   ),
                 )),
