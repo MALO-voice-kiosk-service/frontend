@@ -66,40 +66,46 @@ class TrailViewPageState extends State<TrailViewPage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(top: 200, bottom: 200),
-
               child: Row(
                 children: List.generate((apiMapResult!['data'] as List).length, (index) {
                   return Container(
+                    width: MediaQuery.of(context).size.width * (1/2),
+                    height: MediaQuery.of(context).size.height * (1/3),
                     margin: const EdgeInsets.only(right: 10),
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
                         color: Colors.black38,
                       ),
                     ),
-                    child: Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Get.to(() => TrailDetailPage());
-                          // 완전 센터 눌러야 해요
-                          //(TODO) 추천 지도 get해와서 띄우기
-                        },
-                        child: Column(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                                child: NaverMapWidget(isDetailedMap: false, lineString: apiMapResult!['data'][0]['cot_CONTS_GEOM'],)
+                              width: MediaQuery.of(context).size.width * (1/2) - 20,
+                                height: MediaQuery.of(context).size.height * (1/4),
+                                child: NaverMapWidget(isDetailedMap: false, lineString: apiMapResult!['data'][index]['cot_CONTS_GEOM'],)
                             ),
-                            // Text(
-                            //   (apiMapResult!['data'] as List)[index]['cot_CONTS_GEOM'],
-                            //   style: const TextStyle(
-                            //     color: Colors.black,
-                            //   ),
-                            // ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => TrailDetailPage());
+                              },
+                              child: Text(
+                                '상세 정보',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff481C75),
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
                   );
                 }),
               ),
