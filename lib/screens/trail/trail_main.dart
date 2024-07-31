@@ -56,12 +56,13 @@ class TrailMainPageState extends State<TrailMainPage> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
         child: Column(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
