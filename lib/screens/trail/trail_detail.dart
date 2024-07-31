@@ -11,9 +11,13 @@ class TrailDetailPage extends StatefulWidget {
 }
 
 class TrailDetailPageState extends State<TrailDetailPage> {
+
+  List<dynamic> apiReviewResult = []; // 가공된 리뷰 데이터
+
   late String selectedWalkwayId;
   late String cotCONTSGeom;
   Map<String, dynamic>? apiTrailResult;
+  bool isLiked = false; // Add this state variable
 
   @override
   void initState() {
@@ -22,8 +26,14 @@ class TrailDetailPageState extends State<TrailDetailPage> {
     print('arguments_get: $arguments');
     selectedWalkwayId = arguments[0];
     print('walkway_id: $selectedWalkwayId');
-      cotCONTSGeom = arguments[1];
-      _getSelectedTrailData();
+    cotCONTSGeom = arguments[1];
+
+    _getSelectedTrailData();
+    _loadReviewData(1); //(TODO) 이거 아이디 받아와서 해야해~
+
+    if(isLiked == true){
+      postLike(selectedWalkwayId);
+    }
   }
 
   Future<void> _getSelectedTrailData() async {
@@ -32,30 +42,55 @@ class TrailDetailPageState extends State<TrailDetailPage> {
       apiTrailResult = result['data'];
     });
   }
+  
+  Future<void> _loadReviewData(int id) async {
+    final result = await httpGet(path: '/api/review/$id');
+    setState(() {
+      apiReviewResult = result['data'];
+    });
+  }
+
+  Future<void> postLike(String selectedWalkwayId) async {
+    String plus_url = '/api/like/$selectedWalkwayId';
+    final response = await httpPostString(path: plus_url, data: selectedWalkwayId);
+
+    if (response == 200){
+      print('조아요수 증가 성공');
+    } else {
+      print('조아요수 증가 실패');
+    }
+  }
+
+  void _toggleLike() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          toolbarHeight: 50,
-          automaticallyImplyLeading: false,
-          title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 80,
-                ),
-                IconButton(
-                    icon: const Icon(Icons.close),
-                    color: const Color(0xff481C75),
-                    onPressed: () {
-                      Get.back();
-                    }
-                ),
-              ]
-          )
+        backgroundColor: Colors.white,
+        toolbarHeight: 50,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 80,
+            ),
+            IconButton(
+              icon: const Icon(Icons.close),
+              color: const Color(0xff481C75),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -111,19 +146,19 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       child: Row(
                         children: [
                           IconButton(
-                            onPressed: () {
-                              //(TODO) 누르기 전엔 아웃라인따봉, 누르면 가득찬따봉과 좋아요수++;
-                              null;
-                            },
-                            icon: const Icon(FeatherIcons.thumbsUp),
+                            onPressed: _toggleLike,
+                            icon: Icon(
+                              isLiked ? Icons.thumb_up : FeatherIcons.thumbsUp,
+                            ),
                             color: const Color(0xff481C75),
                             iconSize: 17,
                           ),
                           SizedBox(width: 1,),
                           Text(
-                            apiTrailResult != null
+                            isLiked ? '25개' : '24개',
+                            /*apiTrailResult != null
                                 ? '${apiTrailResult!['likeCount']}개'
-                                : '로딩 중...',
+                                : '로딩 중...',*/
                             style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 15.0,
@@ -171,13 +206,12 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       height: MediaQuery.of(context).size.height * (1 / 4),
                       child: Stack(
                         children: [
-                          // TODO
                           NaverMapWidget(isDetailedMap: false, lineString: cotCONTSGeom,),
                           Container(
                             margin: EdgeInsets.all(10),
                             child: ElevatedButton(
                               onPressed: () {
-                                Get.to(ShowTrailPinPage(), arguments: {true, cotCONTSGeom});
+                                Get.to(ShowTrailPinPage(), arguments: {true, cotCONTSGeom, selectedWalkwayId});
                               },
                               style: ElevatedButton.styleFrom(
                                 fixedSize: Size(MediaQuery.of(context).size.width * (1/3),20),
@@ -227,45 +261,62 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Container(
-                      //(TODO) ListView로 리뷰 get해온거 띄워야 해요
+                      child: apiReviewResult.isEmpty ? Center(child: CircularProgressIndicator()) : ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: apiReviewResult.length,
+                        itemBuilder: (BuildContext context, int index) {
 
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 3, //(TODO) 리뷰 수 세서
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width - 40,
-                                    height: 100, //(TODO) 내용 맞춰서
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        color: Colors.black38,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '리뷰 가져와야 함', //(TODO) 리뷰
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        ),
-                                      ),
+                          return Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                  margin: EdgeInsets.fromLTRB(20, 2, 20, 2),
+                                  width: MediaQuery.of(context).size.width - 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: Colors.black38,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                      ),
+
+                                    child: Container(
+                                      padding: const EdgeInsets.only(left: 10, right: 10),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.person,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            apiReviewResult[index]['review_content'],
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
+
                     ),
                   ],
                 ),

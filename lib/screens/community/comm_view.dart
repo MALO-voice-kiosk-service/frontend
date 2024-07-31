@@ -15,7 +15,7 @@ class CommViewPageState extends State<CommViewPage> {
 
   Map<String, dynamic>? apiResult;
   Map<String, dynamic>? apiPostResult;
-  Map<String, dynamic>? apiCommentResult;
+  List<dynamic> apiCommentResult = [];
 
   final TextEditingController commentController = TextEditingController();
   String comment = "";
@@ -52,7 +52,7 @@ class CommViewPageState extends State<CommViewPage> {
   Future<void> _fetchCommentData(int postId) async {
     final result = await httpGet(path: '/api/post/comment/$postId');
     setState(() {
-      apiCommentResult = result;
+      apiCommentResult = result['data'];
     });
   }
 
@@ -179,19 +179,61 @@ class CommViewPageState extends State<CommViewPage> {
                           ],
                         ),
                       ),
-                      apiCommentResult == null
-                          ? Center(child: CircularProgressIndicator())
-                          : ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: (apiCommentResult!['data'] as List).length,
-                        itemBuilder: (context, index) {
-                          final commentData = (apiCommentResult!['data'] as List)[index];
-                          return ListTile(
-                            title: Text(commentData['comment_content']),
-                          );
-                        },
+                      SizedBox(
+                        height: 5,
                       ),
+                      Container(
+                        child: apiCommentResult == null
+                            ? Center(child: CircularProgressIndicator())
+                            : ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: apiCommentResult.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                    margin: EdgeInsets.fromLTRB(20, 2, 20, 2),
+                                    width: MediaQuery.of(context).size.width - 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                      ),
+                                    ),
+                                    child: Container(
+                                        padding: const EdgeInsets.only(left: 10, right: 10),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              color: Colors.black,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              (apiCommentResult?[index]['comment_content']),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+
+                          },
+                        ),
+                      ),
+
                     ],
                   ),
                 ),
