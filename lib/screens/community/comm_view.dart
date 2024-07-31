@@ -101,7 +101,7 @@ class CommViewPageState extends State<CommViewPage> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        child: Image.asset('lib/assets/defaultImg.png'),
+                        child: Image.asset('lib/assets/images/defaultImg.png'),
                       ),
                       Row(
                         children: [
@@ -254,6 +254,42 @@ class CommViewPageState extends State<CommViewPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        height: 20,
+                        width: 20,
+                        child: Image.asset(
+                            'lib/assets/images/letter.png'),
+                      ),
+                      const Text(
+                        '우리 이웃들의 소리',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '이웃들의 소리, 세상의 소리에 귀 기울여 보세요!',
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                border: Border.all(
+                  color: Colors.black,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+            SizedBox(height: 20,),
             Row(
               children: [
                 ElevatedButton(
@@ -373,7 +409,7 @@ class CommViewPageState extends State<CommViewPage> {
                           // 오른쪽 사진 정보
                           Container(
                             width: MediaQuery.of(context).size.width*(1/3),
-                            child: Image.asset('lib/assets/defaultImg.png'),
+                            child: Image.asset('lib/assets/images/defaultImg.png'),
                           ),
                         ],
                       ),
