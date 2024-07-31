@@ -24,14 +24,11 @@ class LoginPageState extends State<LoginPage> {
     userIdController.addListener(() {
       setState(() {
         userId = userIdController.text;
-        // print("User ID: $userId"); // 디버깅용 로그
       });
     });
-    // TextEditingController에 리스너를 추가하여 입력 값 변경 시 userPw 변수 업데이트.
     userPwController.addListener(() {
       setState(() {
         userPw = userPwController.text;
-        // print("User PW: $userPw"); // 디버깅용 로그
       });
     });
   }
@@ -61,7 +58,6 @@ class LoginPageState extends State<LoginPage> {
     if (response == 200) {
       // 로그인 성공 시 처리
       Get.to(() => MainPage());
-      //print('로그인 성공은 함');
     } else {
       // 로그인 실패 시 처리
       showDialog(
@@ -77,7 +73,6 @@ class LoginPageState extends State<LoginPage> {
             );
           },
       );
-      //print('*** Login failed ***');
     }
   }
 

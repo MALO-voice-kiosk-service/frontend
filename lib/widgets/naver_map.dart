@@ -30,7 +30,6 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
     super.initState();
     _initializeFuture = _initialize();
     _coordinates = _parseCoordinates(_lineString);
-    print('lineString: $_lineString');
   }
 
   Future<void> _initialize() async {
@@ -50,7 +49,6 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
       final latLng = pair.split(" ");
       return NLatLng(double.parse(latLng[1]), double.parse(latLng[0]));
     }).toList();
-    print('coordinates: $coordinates');
     return coordinates;
   }
 
@@ -157,10 +155,8 @@ class PinnedMapPageState extends State<PinnedMapPage> {
     final result = await httpGet(path: '/api/location?category=$pinTag&walkway_id=$walkway_id');
     setState(() {
       apiResult = result;
-      print('pin api result: $apiResult');
       // Update _coordinates with API result
       pinCoordinates = _parseApiCoordinates(apiResult!['data']);
-      print('pinCoordinates: $pinCoordinates');
 
       // Update map with new pinCoordinates
       _updateMapMarkers();
@@ -184,7 +180,6 @@ class PinnedMapPageState extends State<PinnedMapPage> {
       final latLng = pair.split(" ");
       return NLatLng(double.parse(latLng[1]), double.parse(latLng[0]));
     }).toList();
-    print('coordinates: $coordinates');
     return coordinates;
   }
 
@@ -216,12 +211,10 @@ class PinnedMapPageState extends State<PinnedMapPage> {
         }
       }
     }
-    print('Markers: $newMarkers');
   }
 
   @override
   Widget build(BuildContext context) {
-    print('pinnedMap built with $pinTag');
     return FutureBuilder<void>(
       future: _initializeFuture,
       builder: (context, snapshot) {

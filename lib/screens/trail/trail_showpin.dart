@@ -90,7 +90,6 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                     onPressed: (){
                       setState(() {
                         locationTag = 0;
-                        print('pinTag: $locationTag');
                       });
                     },
                     style: ButtonStyle(
@@ -128,7 +127,6 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                     onPressed: (){
                       setState(() {
                         locationTag = 2;
-                        print('pinTag: $locationTag');
                       });
                     },
                     style: ButtonStyle(
@@ -166,7 +164,6 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                     onPressed: (){
                       setState(() {
                         locationTag = 1;
-                        print('pinTag: $locationTag');
                       });
                     },
                     style: ButtonStyle(

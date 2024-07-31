@@ -187,8 +187,6 @@ class TrailMainPageState extends State<TrailMainPage> {
                   child: TextButton(
                     onPressed: () {
                       List<int> selectedCityIds = _getSelectedCityIds();
-                      print('여기서');
-                      print(selectedCityIds);
                       Get.to(() => TrailMainPage2(), arguments: {'selectedCityIds': selectedCityIds});
                     },
                     style: ElevatedButton.styleFrom(

@@ -23,9 +23,7 @@ class TrailDetailPageState extends State<TrailDetailPage> {
   void initState() {
     super.initState();
     final arguments = Get.arguments.toList();
-    print('arguments_get: $arguments');
     selectedWalkwayId = arguments[0];
-    print('walkway_id: $selectedWalkwayId');
     cotCONTSGeom = arguments[1];
 
     _getSelectedTrailData();
@@ -53,12 +51,6 @@ class TrailDetailPageState extends State<TrailDetailPage> {
   Future<void> postLike(String selectedWalkwayId) async {
     String plus_url = '/api/like/$selectedWalkwayId';
     final response = await httpPostString(path: plus_url, data: selectedWalkwayId);
-
-    if (response == 200){
-      print('조아요수 증가 성공');
-    } else {
-      print('조아요수 증가 실패');
-    }
   }
 
   void _toggleLike() {
