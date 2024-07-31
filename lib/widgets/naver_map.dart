@@ -5,8 +5,9 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class NaverMapWidget extends StatefulWidget {
   final bool isDetailedMap;
+  final String lineString;
 
-  NaverMapWidget({Key? key, required this.isDetailedMap}) : super(key: key);
+  NaverMapWidget({Key? key, required this.isDetailedMap, required this.lineString}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => NaverMapWidgetState();
@@ -16,7 +17,7 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
   Future<void>? _initializeFuture;
   Completer<NaverMapController> _mapControllerCompleter = Completer();
 
-  final String _lineString = "LINESTRING(126.943499323195 37.520708636788,126.943436448735 37.5207939689947,126.941731136119 37.5222258307638,126.941503970211 37.5223374257687,126.941296439188 37.5224716470201,126.941191124405 37.5225567772175,126.940822855245 37.5226203822069)";
+  late String _lineString = widget.lineString;
   late List<NLatLng> _coordinates;
   final NLatLng _detailedCoordinate = NLatLng(37.520708636788, 126.943499323195); // 표시할 좌표
 
@@ -25,6 +26,7 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
     super.initState();
     _initializeFuture = _initialize();
     _coordinates = _parseCoordinates(_lineString);
+    print('lineString: $_lineString');
   }
 
   Future<void> _initialize() async {

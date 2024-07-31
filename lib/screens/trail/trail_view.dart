@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_detail.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_showpin.dart';
+import 'package:sparcs_2024_frontend/widgets/naver_map.dart';
 
 class TrailViewPage extends StatefulWidget {
+  Map<String, dynamic>? apiMapResult;
+
+  TrailViewPage({super.key, required this.apiMapResult});
+
   @override
   State<StatefulWidget> createState() => TrailViewPageState();
 }
 
 class TrailViewPageState extends State<TrailViewPage> {
+  late Map<String, dynamic>? apiMapResult;
   static const data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; // 받아온 data
+
+  void initState() {
+    super.initState();
+    apiMapResult = widget.apiMapResult;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +68,9 @@ class TrailViewPageState extends State<TrailViewPage> {
               padding: const EdgeInsets.only(top: 200, bottom: 200),
 
               child: Row(
-                children: List.generate(data.length, (index) {
+                children: List.generate((apiMapResult!['data'] as List).length, (index) {
                   return Container(
                     margin: const EdgeInsets.only(right: 10),
-                    width: 200,
-                    height: 200,
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(15),
@@ -74,11 +85,18 @@ class TrailViewPageState extends State<TrailViewPage> {
                           // 완전 센터 눌러야 해요
                           //(TODO) 추천 지도 get해와서 띄우기
                         },
-                        child: Text(
-                          data[index],
-                          style: const TextStyle(
-                            color: Colors.black,
-                          ),
+                        child: Column(
+                          children: [
+                            Container(
+                                child: NaverMapWidget(isDetailedMap: false, lineString: apiMapResult!['data'][0]['cot_CONTS_GEOM'],)
+                            ),
+                            // Text(
+                            //   (apiMapResult!['data'] as List)[index]['cot_CONTS_GEOM'],
+                            //   style: const TextStyle(
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ),
                     ),
