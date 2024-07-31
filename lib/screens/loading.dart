@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sparcs_2024_frontend/screens/main.dart';
 import 'login_signup/login.dart';
 
 
@@ -27,7 +26,7 @@ class _LoadingPageState extends State<LoadingPage>{
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
-              'lib/assets/back_img.png',
+              'lib/assets/images/back_img.png',
               fit: BoxFit.fill,
             ),
           ),
@@ -54,7 +53,7 @@ class _LoadingPageState extends State<LoadingPage>{
                     padding: const EdgeInsets.only(left: 50),
                     alignment: Alignment.topLeft,
                     child: Image.asset(
-                      'lib/assets/loading_logo.png',
+                      'lib/assets/images/loading_logo.png',
                     ),
                   ),
                 ],
