@@ -43,9 +43,9 @@ class TrailReviewPageState extends State<TrailReviewPage> {
     //(TODO) id 받아와서 하는 걸로 수정해야 해
 
     if (response == 200) {
-      print('*** Review Upload Successed ***');
-      print('content');
-      print(content);
+      //print('*** Review Upload Successed ***');
+      //print('content');
+      //print(content);
       Get.to(() => TrailReviewEndPage());
       //_fetchCommentData(postId);
     } else {
