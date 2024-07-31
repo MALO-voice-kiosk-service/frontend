@@ -230,7 +230,7 @@ class LoginPageState extends State<LoginPage> {
                               width: 100,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Get.to(() => SignupPage());
+                                  Get.to(SignupPage());
                                 },
                                 style: ElevatedButton.styleFrom(
                                     foregroundColor: Colors.black,
