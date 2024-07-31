@@ -168,7 +168,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                                       _toggleSelection(0);
                                     },
                                     icon: Image.asset(
-                                      'lib/assets/dog.png',
+                                      'lib/assets/images/dog.png',
                                       width: 150, // 이미지의 너비 설정
                                       height: 100, // 이미지의 높이 설정
                                       fit: BoxFit.contain, // 이미지가 Container를 채우도록
@@ -207,7 +207,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                                       _toggleSelection(1);
                                     },
                                     icon: Image.asset(
-                                      'lib/assets/together.png',
+                                      'lib/assets/images/together.png',
                                       width: 150, // 이미지의 너비 설정
                                       height: 100, // 이미지의 높이 설정
                                       fit: BoxFit.contain, // 이미지가 Container를 채우도록
@@ -246,7 +246,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                                       _toggleSelection(2);
                                     },
                                     icon: Image.asset(
-                                      'lib/assets/wheelchair.png',
+                                      'lib/assets/images/wheelchair.png',
                                       width: 150, // 이미지의 너비 설정
                                       height: 100, // 이미지의 높이 설정
                                       fit: BoxFit.contain, // 이미지가 Container를 채우도록
