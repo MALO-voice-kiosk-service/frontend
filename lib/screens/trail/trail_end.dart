@@ -3,6 +3,9 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sparcs_2024_frontend/screens/trail/trail_main.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_review.dart';
+
+import '../main.dart';
 
 class TrailEndPage extends StatefulWidget {
 
@@ -23,12 +26,15 @@ class TrailEndPageState extends State<TrailEndPage> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width - 40,
-                    height: MediaQuery.of(context).size.height - 350,
+                    height: MediaQuery.of(context).size.height - 300,
                     child: SingleChildScrollView(
                       child: Container(
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
+                            SizedBox(
+                              height: 100,
+                            ),
                             Text(
                               '축하드립니다 !',
                               style: TextStyle(
@@ -82,6 +88,7 @@ class TrailEndPageState extends State<TrailEndPage> {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    Get.to(() => TrailReviewPage());
 
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -100,7 +107,7 @@ class TrailEndPageState extends State<TrailEndPage> {
                                   ),
                                 )
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 20),
                             Container(
                                 margin: EdgeInsets.fromLTRB(
                                     (MediaQuery.of(context).size.width) * (1 / 5),
@@ -110,7 +117,7 @@ class TrailEndPageState extends State<TrailEndPage> {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Get.to(() => TrailMainPage());
+                                    Get.to(() => MainPage());
                                   },
                                   style: ElevatedButton.styleFrom(
                                       foregroundColor: Colors.white,

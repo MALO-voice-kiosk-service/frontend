@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
+import 'package:sparcs_2024_frontend/screens/trail/trail_end.dart';
 import 'package:sparcs_2024_frontend/widgets/naver_map.dart';
 
 class ShowTrailPinPage extends StatefulWidget {
@@ -73,7 +74,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
                 onPressed: (){
-
+                  Get.to(() => TrailEndPage());
                 },
                 child: const Text(
                   '산책 끝내기',

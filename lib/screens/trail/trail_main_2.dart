@@ -13,7 +13,7 @@ class TrailMainPage2 extends StatefulWidget {
 }
 
 class TrailMainPage2State extends State<TrailMainPage2> {
-  static const keywords = ['반려견과', '동반자와', '혼자'];
+  static const keywords = ['반려견과', '보호자와', '혼자'];
   Map<int, bool> selectedKeywords = {}; // 키워드 선택 상태
   int? selectedKeywordIndex; // 선택된 키워드 인덱스
 
