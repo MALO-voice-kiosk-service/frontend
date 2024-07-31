@@ -92,7 +92,10 @@ class TrailViewPageState extends State<TrailViewPage> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                Get.to(() => TrailDetailPage());
+                                //print(index);
+                                //print("선택된 walkway 아이디: ");
+                                //print(apiMapResult!['data'][index]['walkway_id']);
+                                Get.to(() => TrailDetailPage(), arguments: {apiMapResult!['data'][index]['walkway_id'].toString(), apiMapResult!['data'][index]['cot_CONTS_GEOM'].toString()});
                               },
                               child: Text(
                                 '상세 정보',
