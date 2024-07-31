@@ -119,6 +119,27 @@ class SignupPageState extends State<SignupPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          toolbarHeight: 50,
+          automaticallyImplyLeading: false,
+          title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 80,
+                ),
+                IconButton(
+                    icon: const Icon(Icons.close),
+                    color: const Color(0xff481C75),
+                    onPressed: () {
+                      Get.back();
+                    }
+                ),
+
+              ]
+          )
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
         child: Form(
