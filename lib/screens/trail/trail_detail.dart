@@ -69,11 +69,10 @@ class TrailDetailPageState extends State<TrailDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xff8B75B5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         toolbarHeight: 50,
         automaticallyImplyLeading: false,
         title: Row(
@@ -95,6 +94,7 @@ class TrailDetailPageState extends State<TrailDetailPage> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.only(bottom: 20),
@@ -102,227 +102,279 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 10),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset('lib/assets/images/defaultImg.png'),
-                    ),
-                    Container(
-                      child: Text(
-                        '산책로 설명',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black38,
+                          width: 1,
                         ),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
+                          ),
+                        ],
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Flexible(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 5,
-                              strutStyle: StrutStyle(fontSize: 14.0),
-                              text: TextSpan(
-                                text: apiTrailResult != null
-                                    ? apiTrailResult!['walkway_description']
-                                    : '로딩 중...',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.0,
-                                ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset('lib/assets/images/defaultImg.png'),
+                          ),
+                          SizedBox(height: 10,),
+                          Container(
+                            child: Text(
+                              '혼자 즐기는 공원 산책',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 5,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: _toggleLike,
-                            icon: Icon(
-                              isLiked ? Icons.thumb_up : FeatherIcons.thumbsUp,
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: RichText(
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 5,
+                                    strutStyle: StrutStyle(fontSize: 14.0),
+                                    text: TextSpan(
+                                      text: apiTrailResult != null
+                                          ? apiTrailResult!['walkway_description']
+                                          : '로딩 중...',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            color: const Color(0xff481C75),
-                            iconSize: 17,
                           ),
-                          SizedBox(width: 1,),
-                          Text(
-                            isLiked ? '25개' : '24개',
-                            /*apiTrailResult != null
+                          Container(
+                            height: 5,
+                          ),
+                          Container(
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  onPressed: _toggleLike,
+                                  icon: Icon(
+                                    isLiked ? Icons.thumb_up : FeatherIcons.thumbsUp,
+                                  ),
+                                  color: const Color(0xff481C75),
+                                  iconSize: 17,
+                                ),
+                                SizedBox(width: 1,),
+                                Text(
+                                  isLiked ? '25개' : '24개',
+                                  /*apiTrailResult != null
                                 ? '${apiTrailResult!['likeCount']}개'
                                 : '로딩 중...',*/
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(width: 15,),
-                          const Text(
-                            '리뷰',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(width: 1,),
-                          const Text(
-                            '10개',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      '지도',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 17.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 10,),
-                    Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: MediaQuery.of(context).size.height * (1 / 4),
-                      child: Stack(
-                        children: [
-                          NaverMapWidget(isDetailedMap: false, lineString: cotCONTSGeom,),
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.to(ShowTrailPinPage(), arguments: {true, cotCONTSGeom, selectedWalkwayId});
-                              },
-                              style: ElevatedButton.styleFrom(
-                                fixedSize: Size(MediaQuery.of(context).size.width * (1/3),20),
-                                shape: BeveledRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                                backgroundColor: Color(0xff481C75),
-                              ),
-                              child: const Text(
-                                '산책 시작하기',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.white,
+                                SizedBox(width: 15,),
+                                const Text(
+                                  '리뷰',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
+                                SizedBox(width: 1,),
+                                const Text(
+                                  '10개',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(
-                      height: 3,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      height: 40,
                     ),
                     Container(
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.comment_outlined,
-                            size: 17,
-                            color: Color(0xff481C75),
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black38,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
                           ),
-                          SizedBox(width: 5,),
-                          Text(
-                            '사용자들의 리뷰',
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            '지도',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 17.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      child: apiReviewResult.isEmpty ? Center(child: CircularProgressIndicator()) : ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: apiReviewResult.length,
-                        itemBuilder: (BuildContext context, int index) {
-
-                          return Container(
-                            child: Column(
+                          SizedBox(height: 10,),
+                          Container(
+                            width: MediaQuery.of(context).size.width - 40,
+                            height: MediaQuery.of(context).size.height * (1 / 4),
+                            child: Stack(
                               children: [
+                                NaverMapWidget(isDetailedMap: false, lineString: cotCONTSGeom,),
                                 Container(
-                                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                                  margin: EdgeInsets.fromLTRB(20, 2, 20, 2),
-                                  width: MediaQuery.of(context).size.width - 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                      color: Colors.black38,
+                                  margin: EdgeInsets.all(10),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.to(ShowTrailPinPage(), arguments: {true, cotCONTSGeom, selectedWalkwayId});
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      fixedSize: Size(MediaQuery.of(context).size.width * (1/3),15),
+                                      backgroundColor: Color(0xff481C75),
+                                    ),
+                                    child: const Text(
+                                      '산책 시작하기',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                  child: Container(
-                                    padding: const EdgeInsets.only(left: 10, right: 10),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.person,
-                                          color: Colors.black,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Flexible( // 이 부분 추가
-                                          child: Text(
-                                            apiReviewResult[index]['review_content'],
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.black,
-                                            ),
-                                            softWrap: true,
-                                            overflow: TextOverflow.visible, // 이 부분 수정
-                                            maxLines: null, // 자동 줄바꿈
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-
-                                const SizedBox(
-                                  height: 10,
                                 ),
                               ],
                             ),
-                          );
-                        },
-                      )
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black38,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: const Row(
+                              children: [
+                                Icon(
+                                  Icons.comment_outlined,
+                                  size: 17,
+                                  color: Color(0xff481C75),
+                                ),
+                                SizedBox(width: 5,),
+                                Text(
+                                  '사용자들의 리뷰',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                              child: apiReviewResult.isEmpty ? Center(child: CircularProgressIndicator()) : ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: apiReviewResult.length,
+                                itemBuilder: (BuildContext context, int index) {
 
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                          margin: EdgeInsets.fromLTRB(20, 2, 20, 2),
+                                          width: MediaQuery.of(context).size.width - 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius: BorderRadius.circular(15),
+                                            border: Border.all(
+                                              color: Colors.black38,
+                                            ),
+                                          ),
+                                          child: Container(
+                                            padding: const EdgeInsets.only(left: 10, right: 10),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.person,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Flexible( // 이 부분 추가
+                                                  child: Text(
+                                                    apiReviewResult[index]['review_content'],
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                    ),
+                                                    softWrap: true,
+                                                    overflow: TextOverflow.visible, // 이 부분 수정
+                                                    maxLines: null, // 자동 줄바꿈
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
+
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              )
+
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
