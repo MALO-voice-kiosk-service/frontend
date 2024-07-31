@@ -13,13 +13,18 @@ class ShowTrailPinPage extends StatefulWidget {
 
 class ShowTrailPinPageState extends State<ShowTrailPinPage> {
   Future<void>? _initializeFuture;
-  bool isDetailedMap = Get.arguments;
+  late bool isDetailedMap;
+  late String lineString;
   int locationTag = 0; // 화장실 : 0, 전동보장구 급속충전기 : 1, 영화관 : 2
 
   @override
   void initState() {
     super.initState();
     _initializeFuture = _initialize();
+
+    final arguments = Get.arguments.toList();
+    isDetailedMap = arguments[0] as bool;
+    lineString = arguments[1];
   }
 
   Future<void> _initialize() async {
@@ -70,7 +75,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
       body: Stack(
         children: [
           // TODO
-          NaverMapWidget(isDetailedMap: true, lineString: '123',),
+          NaverMapWidget(isDetailedMap: true, lineString: lineString,),
           Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(left: 10, right: 10),

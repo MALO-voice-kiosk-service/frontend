@@ -55,27 +55,6 @@ class TrailMainPageState extends State<TrailMainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        toolbarHeight: 50,
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              width: 80,
-        ),
-            IconButton(
-                icon: const Icon(Icons.close),
-                color: const Color(0xff481C75),
-                onPressed: () {
-                  Get.back();
-                }
-            ),
-
-        ]
-        )
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
@@ -141,23 +120,6 @@ class TrailMainPageState extends State<TrailMainPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.map_outlined),
-                  color: const Color(0xff481C75),
-                  onPressed: () {
-                    // 지도에서 선택 기능 추가
-                  },
-                ),
-                Text(
-                  '지도에서 선택',
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-              ],
             ),
             Container(
               width: MediaQuery.of(context).size.width - 40,

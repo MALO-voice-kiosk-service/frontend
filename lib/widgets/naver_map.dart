@@ -3,6 +3,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
+import '../service/api.dart';
+
 class NaverMapWidget extends StatefulWidget {
   final bool isDetailedMap;
   final String lineString;
@@ -105,3 +107,5 @@ class NaverMapWidgetState extends State<NaverMapWidget> {
     );
   }
 }
+
+
