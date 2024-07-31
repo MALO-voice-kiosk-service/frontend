@@ -85,166 +85,180 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: 100,
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-                child: Image.asset(
-                  'lib/assets/logo.png',
-                  width: (MediaQuery.of(context).size.width) * (2 / 3),
-                  height: (MediaQuery.of(context).size.width) * (1 / 5),
-                  fit: BoxFit.contain,
-                ),
-              ),
-              Container(
-                height: 50,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    (MediaQuery.of(context).size.width) * (1 / 5),
-                    0,
-                    (MediaQuery.of(context).size.width) * (1 / 5),
-                    0),
-                child: TextFormField(
-                  key: const ValueKey(3),
-                  controller: userIdController, // TextFormField에 controller를 설정.
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    hintText: "아이디 입력",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                      //fontWeight: FontWeight.bold,
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Container(
-                height: 40,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    (MediaQuery.of(context).size.width) * (1 / 5),
-                    0,
-                    (MediaQuery.of(context).size.width) * (1 / 5),
-                    0),
-                child: TextFormField(
-                  key: const ValueKey(4),
-                  controller: userPwController, // TextFormField에 controller를 설정.
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    hintText: "비밀번호 입력",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                      //fontWeight: FontWeight.bold,
-                    ),
-                    contentPadding: EdgeInsets.all(10),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Container(
-                height: 40,
-              ),
-              Container(
-                  margin: EdgeInsets.fromLTRB(
-                      (MediaQuery.of(context).size.width) * (1 / 5),
-                      0,
-                      (MediaQuery.of(context).size.width) * (1 / 5),
-                      0),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _login(); // 로그인 함수 호출
-                    },
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
-                        padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
-                        )),
-                    child: const Text(
-                      '로그인',
-                      style: TextStyle(
-                        fontSize: 20,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )),
-              Container(
-                height: 40,
-              ),
-              Container(
-                  margin: EdgeInsets.fromLTRB(
-                      (MediaQuery.of(context).size.width) * (1 / 5),
-                      0,
-                      (MediaQuery.of(context).size.width) * (1 / 5),
-                      0),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => SignupPage());
-                    },
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.white,
-                        side: BorderSide(
-                            color: Color.fromRGBO(139, 117, 181, 1.0)),
-                        padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // 모서리를 둥글게 설정
-                        )),
-                    child: const Text(
-                      '회원가입',
-                      style: TextStyle(
-                        fontSize: 20,
-                        //fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )),
-            ],
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Image.asset(
+                'lib/assets/back_img.png',
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width*(6/7),
+                height: MediaQuery.of(context).size.height*(6/7),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 3,
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 100,
+                      ),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          'lib/assets/logo_black.png',
+                          width: (MediaQuery.of(context).size.width) * (3 / 4),
+                          height: (MediaQuery.of(context).size.width) * (1 / 4),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Container(
+                        height: 50,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: TextFormField(
+                          key: const ValueKey(3),
+                          controller: userIdController, // TextFormField에 controller를 설정.
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.grey,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            hintText: "아이디 입력",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontFamily: 'NanumSquareNeo',
+                            ),
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: TextFormField(
+                          key: const ValueKey(4),
+                          controller: userPwController, // TextFormField에 controller를 설정.
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.grey,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            hintText: "비밀번호 입력",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontFamily: 'NanumSquareNeo',
+                            ),
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              width: 100,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  _login(); // 로그인 함수 호출
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Color.fromRGBO(139, 117, 181, 1.0),
+                                    padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45), // 모서리를 둥글게 설정
+                                    )),
+                                child: const Text(
+                                  '로그인',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: 'NanumSquareNeo',
+                                  ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              width: 100,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Get.to(() => SignupPage());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.black,
+                                    backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                        color: Color.fromRGBO(139, 117, 181, 1.0)),
+                                    padding: EdgeInsets.symmetric(vertical: 15), // 버튼 높이 조정
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45), // 모서리를 둥글게 설정
+                                    )),
+                                child: const Text(
+                                  '회원가입',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: 'NanumSquareNeo',
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
