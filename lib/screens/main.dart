@@ -16,7 +16,9 @@ class NeuruApp extends StatelessWidget{
       home: LoadingPage(),
       theme: ThemeData(
         splashFactory: NoSplash.splashFactory,
+        fontFamily: 'NanumSquareNeo',
       ),
+      themeMode: ThemeMode.system,
     );
   }
 
@@ -41,21 +43,6 @@ class MainPageState extends State<MainPage> {
       _selectedIndex = index;
     });
   }
-  /*void onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    if (index == 0) {
-      // TrailMainPage로 이동할 때 userNickname을 전달
-      Get.toNamed('/trail', arguments: userNickname);
-    } else {
-      // 다른 페이지로 이동할 때
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
