@@ -56,12 +56,6 @@ class CommUploadPageState extends State<CommUploadPage> {
     };
 
     final response = await httpPost(path: url, data: data);
-
-    if (response == 200) {
-      print('*** Upload Successed ***');
-    } else {
-      print('*** Upload failed ***');
-    }
   }
 
   @override

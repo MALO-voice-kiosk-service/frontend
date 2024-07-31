@@ -60,13 +60,6 @@ class CommViewPageState extends State<CommViewPage> {
   Future<void> uploadComment(int postId) async {
     String url = '/api/post/comment/$postId';
     final response = await httpPostString(path: url, data: comment);
-
-    if (response == 200) {
-      print('*** Upload Successed ***');
-      _fetchCommentData(postId);
-    } else {
-      print('*** Upload failed ***');
-    }
   }
 
   void showDetails(BuildContext context, int id){
@@ -246,7 +239,7 @@ class CommViewPageState extends State<CommViewPage> {
 
   // 특정 게시물
   Future<void> _fetchPostData(BuildContext context, int id) async {
-    print('id: $id');
+
     final result = await httpGet(path: '/api/post/$id');
     await _fetchCommentData(id);
     setState(() {
@@ -280,7 +273,6 @@ class CommViewPageState extends State<CommViewPage> {
                 color: Colors.black,
                 onPressed: () async {
                   final result = await Get.to(CommUploadPage());
-                  print("get result: $result");
                   if (result == true) {
                     await _fetchData();
                   }

@@ -34,10 +34,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
     };
 
     // httpPOST 함수를 호출하여 데이터를 전송합니다.
-    print('data :');
-    print(data);
     final response = await httpPostForMap(path: url, data: data);
-    print('response: $response');
 
     if (response['success'] == true) {
       Get.to(() => TrailViewPage(apiMapResult: response));
@@ -55,7 +52,6 @@ class TrailMainPage2State extends State<TrailMainPage2> {
           );
         },
       );
-      //print('*** Login failed ***');
     }
   }
 
@@ -148,7 +144,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                 SizedBox(height: 10),
                 Container(
                   width: MediaQuery.of(context).size.width - 40,
-                  height: MediaQuery.of(context).size.height - 540,
+                  height: MediaQuery.of(context).size.height - 650,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
@@ -296,8 +292,6 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                       selectedKeywordIndex = selectedKeywords.entries
                           .firstWhere((element) => element.value == true, orElse: () => MapEntry(-1, false))
                           .key;
-                      print(selectedCityIds);
-                      print('선택된 키워드 인덱스: $selectedKeywordIndex'); // 선택된 키워드 인덱스 확인용 출력
                       _keywordPost(selectedCityIds[0], selectedKeywordIndex!);
                       //Get.to(() => TrailViewPage());
                     },
@@ -318,7 +312,7 @@ class TrailMainPage2State extends State<TrailMainPage2> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 150),
                 Container(
                   width: MediaQuery.of(context).size.width - 40,
                   height: MediaQuery.of(context).size.height * (1 / 7),

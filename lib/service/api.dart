@@ -20,7 +20,6 @@ Future<Map<String, dynamic>> httpGet({required String path}) async {
     }
   } catch (e) {
     // 서버가 응답하지 않는 경우
-    print("httpGet error: $e");
     return {'statusCode': 503};
   }
 }
@@ -45,7 +44,6 @@ Future<Map<String, dynamic>> httpPostForMap({required String path, Map? data}) a
 
   } catch (e) {
     // 서버가 응답하지 않는 경우
-    print("httpGet error: $e");
     return {'statusCode': 503};
   }
 }
@@ -64,7 +62,6 @@ Future<int> httpPost({required String path, Map? data}) async {
     return response.statusCode;
 
   } catch (e) {
-    print("httpPost error: $e");
     return 503;
   }
 }
@@ -83,7 +80,6 @@ Future<int> httpPostString({required String path, required String data}) async {
     return response.statusCode;
 
   } catch (e) {
-    print("httpPost error: $e");
     return 503;
   }
 }
