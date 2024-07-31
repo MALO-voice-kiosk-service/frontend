@@ -19,6 +19,26 @@ class TrailEndPageState extends State<TrailEndPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          toolbarHeight: 50,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: const Color(0xff481C75),
+                onPressed: () {
+                  Get.back();
+                },
+                style: ButtonStyle(
+                  overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
+                ),
+              ),
+            ],
+          ),
+        ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child:
