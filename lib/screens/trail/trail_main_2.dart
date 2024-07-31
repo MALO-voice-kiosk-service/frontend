@@ -36,14 +36,12 @@ class TrailMainPage2State extends State<TrailMainPage2> {
     // httpPOST 함수를 호출하여 데이터를 전송합니다.
     print('data :');
     print(data);
-    final response = await httpPost(path: url, data: data);
+    final response = await httpPostForMap(path: url, data: data);
+    print('response: $response');
 
-    if (response == 200) {
-      // 로그인 성공 시 처리
-      Get.to(() => TrailViewPage());
-      //print('로그인 성공은 함');
+    if (response['success'] == true) {
+      Get.to(() => TrailViewPage(apiMapResult: response));
     } else {
-      // 로그인 실패 시 처리
       showDialog(
         context: context,
         builder: (BuildContext context) {

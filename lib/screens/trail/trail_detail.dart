@@ -95,19 +95,19 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                               ),
                             ),
                             SizedBox(width: 15,),
-                            Text(
+                            const Text(
                               '리뷰',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(width: 1,),
-                            Text(
+                            const Text(
                               //(TODO) 리뷰 수 get해오기
                               '10개',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold,
@@ -122,9 +122,9 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         '지도',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,
@@ -133,23 +133,17 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       SizedBox(height: 10,),
                       Container(
                         width: MediaQuery.of(context).size.width - 40,
-                        height: MediaQuery.of(context).size.height * (1 / 5),
+                        height: MediaQuery.of(context).size.height * (1 / 4),
                         child: Stack(
                           children: [
-                            NaverMapWidget(isDetailedMap: false,),
+                            // TODO
+                            NaverMapWidget(isDetailedMap: false, lineString: '123',),
                             Container(
                               margin: EdgeInsets.all(10),
                               child: ElevatedButton(
                                   onPressed: (){
                                     Get.to(ShowTrailPinPage(), arguments: true);
                                   },
-                                  child: const Text(
-                                    '산책 시작하기',
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.white,
-                                    ),
-                                  ),
                                 style: ElevatedButton.styleFrom(
                                   fixedSize: Size(MediaQuery.of(context).size.width * (1/3),20),
                                   shape: BeveledRectangleBorder(
@@ -157,6 +151,13 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                                   ),
                                   backgroundColor: Color(0xff481C75),
                                 ),
+                                  child: const Text(
+                                    '산책 시작하기',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                               ),
                             ),
                           ],
@@ -165,27 +166,6 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                       const SizedBox(
                         height: 3,
                       ),
-                      Text(
-                        '출발지: (여기도 나중에 get)',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Text(
-                        '도착지: (여기도 나중에 get)',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Text(
-                        '이동거리: (여기도 나중에 get)',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
-                        ),
-                      ),
                       const Divider(
                         color: Colors.grey,
                       ),
@@ -193,17 +173,17 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                         height: 10,
                       ),
                       Container(
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.comment_outlined,
                               size: 17,
-                              color: const Color(0xff481C75),
+                              color: Color(0xff481C75),
                             ),
                             SizedBox(width: 5,),
                             Text(
                               '사용자들의 리뷰',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.bold,

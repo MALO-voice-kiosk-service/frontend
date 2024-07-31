@@ -69,7 +69,8 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
       ),
       body: Stack(
         children: [
-          NaverMapWidget(isDetailedMap: true),
+          // TODO
+          NaverMapWidget(isDetailedMap: true, lineString: '123',),
           Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(left: 10, right: 10),
