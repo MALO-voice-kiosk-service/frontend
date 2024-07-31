@@ -16,6 +16,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
   late bool isDetailedMap;
   late String lineString;
   int locationTag = 0; // 화장실 : 0, 전동보장구 급속충전기 : 1, 영화관 : 2
+  late String walkway_id;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
     final arguments = Get.arguments.toList();
     isDetailedMap = arguments[0] as bool;
     lineString = arguments[1];
+    walkway_id = arguments[2];
   }
 
   Future<void> _initialize() async {
@@ -74,7 +76,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
       ),
       body: Stack(
         children: [
-          PinnedMapPage(isDetailedMap: true, lineString: lineString, pinTag: locationTag,),
+          PinnedMapPage(isDetailedMap: true, lineString: lineString, pinTag: locationTag, walkway_id: walkway_id,),
           Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(left: 10, right: 10),
