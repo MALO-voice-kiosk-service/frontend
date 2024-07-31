@@ -97,7 +97,7 @@ class TrailDetailPageState extends State<TrailDetailPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.only(bottom: 20),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,29 +285,35 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                                       color: Colors.black38,
                                     ),
                                   ),
-
-                                    child: Container(
-                                      padding: const EdgeInsets.only(left: 10, right: 10),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.person,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 10, right: 10),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Flexible( // 이 부분 추가
+                                          child: Text(
                                             apiReviewResult[index]['review_content'],
                                             style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.black,
                                             ),
+                                            softWrap: true,
+                                            overflow: TextOverflow.visible, // 이 부분 수정
+                                            maxLines: null, // 자동 줄바꿈
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                 ),
+
+
                                 const SizedBox(
                                   height: 10,
                                 ),
