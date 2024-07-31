@@ -103,7 +103,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                       children: [
                         Container(
                             child: Image.asset(
-                                'lib/assets/toilet.png',
+                                'lib/assets/images/toilet.png',
                               fit: BoxFit.contain,
                             ),
                           width: 20,
@@ -140,7 +140,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                       children: [
                         Container(
                           child: Image.asset(
-                            'lib/assets/wheelchair_2.png',
+                            'lib/assets/images/wheelchair_2.png',
                             fit: BoxFit.contain,
                           ),
                           width: 20,
@@ -177,7 +177,7 @@ class ShowTrailPinPageState extends State<ShowTrailPinPage> {
                       children: [
                         Container(
                           child: Image.asset(
-                            'lib/assets/movie.png',
+                            'lib/assets/images/movie.png',
                             fit: BoxFit.contain,
                           ),
                           width: 20,

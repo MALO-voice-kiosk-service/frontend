@@ -91,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
-                'lib/assets/back_img.png',
+                'lib/assets/images/back_img.png',
               fit: BoxFit.fill,
             ),
           ),
@@ -119,7 +119,7 @@ class LoginPageState extends State<LoginPage> {
                       Container(
                         alignment: Alignment.topCenter,
                         child: Image.asset(
-                          'lib/assets/logo_black.png',
+                          'lib/assets/images/logo_black.png',
                           width: (MediaQuery.of(context).size.width) * (3 / 4),
                           height: (MediaQuery.of(context).size.width) * (1 / 4),
                           fit: BoxFit.contain,

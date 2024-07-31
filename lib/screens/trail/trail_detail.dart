@@ -69,7 +69,7 @@ class TrailDetailPageState extends State<TrailDetailPage> {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      child: Image.asset('lib/assets/defaultImg.png'),
+                      child: Image.asset('lib/assets/images/defaultImg.png'),
                     ),
                     Container(
                       child: Text(
