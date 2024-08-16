@@ -1,5 +1,3 @@
-# README
-
 # 느루
 
 <div style="display: flex; align-items: center;">
