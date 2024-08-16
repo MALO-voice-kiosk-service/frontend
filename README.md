@@ -17,10 +17,10 @@
 ---
 
 ## 팀원
-
-[leeyuminn - Overview](https://github.com/leeyuminn)
-
-[sunnygeem - Overview](https://github.com/sunnygeem)
+|이름|소속|Github|
+|---|---|---|
+|🐰 김선희|한양대학교 컴퓨터소프트웨어학부|<a href="https://github.com/sunnygeem" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
+|🐶 이유민|한양대학교 컴퓨터소프트웨어학부|<a href="https://github.com/leeyuminn" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"></a>|
 
 ---
 
